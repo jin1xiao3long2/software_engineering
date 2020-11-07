@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>
+        /*a标签去下划线和点击不变色，div内容居中*/
+        a {
+            text-decoration: none;
+            color: #333333;
+        }
+
+        #idiv {
+            text-align: center;
+            border-radius: 20px;
+            width: 300px;
+            height: 350px;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="idiv">
+    <form >
+        请输入姓名<input id="name" name="name" required="required"><br><br>
+        请输入密码<input id="password" name="password" type="password" placeholder="仅支持正整数" required="required"><br><br>
+        <input type="submit" value="登录"> &nbsp;<button><a>注册</a></button>
+    </form>
+</div>
+</body>
+</html>
