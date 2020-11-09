@@ -25,15 +25,16 @@
     </style>
 </head>
 <body>
-<div th:replace="~{Bar :: topBar(activeUri='code.html')}"></div>
 <div id="idiv">
-    <form >
-<!--        添加action="/gologin",method="post"来传输数据-->
+
+    <form action="/gologin" method="post">
         请输入姓名<input id="name" name="name" required="required" placeholder="请输入姓名"><br><br>
         请输入密码<input id="password" name="password" type="password" placeholder="请输入密码" required="required"><br><br>
         <input type="submit" value="登录">
-        &nbsp<button><a href="/register">注册</a></button>
-        &nbsp<button><a href="/getPassword">找回密码</a></button>
+        &nbsp
+        <button><a href="/register">注册</a></button>
+        &nbsp
+        <button><a href="/getPassword">找回密码</a></button>
     </form>
 </div>
 

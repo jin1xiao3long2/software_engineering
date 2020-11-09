@@ -11,6 +11,7 @@ public interface UserDao {
 
     int addUser(UserInfo user);
 
+    UserInfo login(UserInfo user);
 //    UserInfo findByID(Integer id);
 
 //    int updateUser(UserInfo user);

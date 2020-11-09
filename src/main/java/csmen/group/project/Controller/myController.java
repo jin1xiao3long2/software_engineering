@@ -3,15 +3,19 @@ package csmen.group.project.Controller;
 import csmen.group.project.dao.UserDao;
 import csmen.group.project.entity.UserInfo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class myController {
 
-//    @Resource
+    //    @Resource
 //    private AdminDao ad;
     @Resource
     private UserDao ud;
@@ -27,6 +31,27 @@ public class myController {
         return "Login";
     }
 
+    @RequestMapping("/gologin")
+    public String gologin(UserInfo user, HttpServletRequest request, Model model) {
+        UserInfo uu = ud.login(user);
+        if(uu == null){
+            return "public/False";
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute("aname",user.getName());
+        session.setAttribute("apassword", user.getPassword());
+//        get image
+        model.addAttribute("user",user);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/gologout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
+    }
+
+
     @RequestMapping("/register")
     public String register() {
         return "Register";
@@ -38,15 +63,15 @@ public class myController {
     }
 
     @RequestMapping("/getPassword")
-    public String getPassword(){
+    public String getPassword() {
         return "GetPassword";
     }
 
     @RequestMapping("/addUser")
     @ResponseBody
-    public boolean addUser(UserInfo user){
+    public boolean addUser(UserInfo user) {
         int i = ud.addUser(user);
-        if(i > 0)
+        if (i > 0)
             return true;
         else
             return false;
