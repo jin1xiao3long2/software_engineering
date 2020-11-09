@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
@@ -25,12 +25,19 @@
     </style>
 </head>
 <body>
+<div th:replace="~{Bar :: topBar(activeUri='code.html')}"></div>
 <div id="idiv">
     <form >
-        请输入姓名<input id="name" name="name" required="required"><br><br>
-        请输入密码<input id="password" name="password" type="password" placeholder="仅支持正整数" required="required"><br><br>
-        <input type="submit" value="登录"> &nbsp;<button><a>注册</a></button>
+<!--        添加action="/gologin",method="post"来传输数据-->
+        请输入姓名<input id="name" name="name" required="required" placeholder="请输入姓名"><br><br>
+        请输入密码<input id="password" name="password" type="password" placeholder="请输入密码" required="required"><br><br>
+        <input type="submit" value="登录">
+        &nbsp<button><a href="/register">注册</a></button>
+        &nbsp<button><a href="/getPassword">找回密码</a></button>
     </form>
 </div>
+
+
+<div th:replace="~{Bar :: footerBar}"></div>
 </body>
 </html>

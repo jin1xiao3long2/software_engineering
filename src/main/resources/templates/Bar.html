@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<div class="naviBar" th:fragment="topBar">
+    <div class="navi">
+<!--        <img id="logo" th:src="@{/static/images/tlogo.png}"/>-->
+        <ul id="menu">
+            <li><a href="/">在售项目</a></li>
+            <li><a href="/login">预定项目</a></li>
+            <li><a href="#">技术贴吧</a></li>
+            <li><a href="/settings">个人中心</a></li>
+<!--            个人中心这个选项用动态显示-->
+            <li>
+                <div class="logout">
+                    <a href="#">退出</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- 底部信息栏 -->
+<div class="footerbar" th:fragment="footerBar">
+    <hr/>
+    &copy 2019 版权所有
+</div>
+
+</body>

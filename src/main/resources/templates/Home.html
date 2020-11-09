@@ -6,9 +6,11 @@
     <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
 </head>
 <body>
-
+<!-- 顶部导航栏 -->
+<div th:replace="~{Bar :: topBar}"></div>
 <h2>主界面</h2>
-<button onclick="test()">测试</button>
+<button onclick="test()">Main</button>
+<div th:replace="~{Bar :: footerBar}"></div>
 
 <script>
     function test(){

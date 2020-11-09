@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>账号注册</title>
+    <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+</head>
+<body>
+<h2>账号注册</h2>
+请输入姓名：<input type="text" id="name"/><br><br>
+请输入密码：<input type="password" id="password" placeholder="仅支持整数"/><br><br>
+请确认密码：<input type="password" id="passwordTwo" placeholder="仅支持整数"/><br><br>
+请选择性别：<select id="sex" name="sex" style="width: 173px">
+    <option value="male">男</option>
+    <option value="female">女</option>
+</select><br><br>
+请输入手机号: <input type="text" id="phone_number" placeholder="请输入13位手机号" pattern="(\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$" required="required">
+请输入身份证号: <input type = "text" id="id_number" placeholder="请输入15位或18位身份证号" pattern="(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)" required = "required">
+
+<button onclick="register()">注册</button>
+</body>
+<script>
+    function register() {
+        var name = $("#name").val();
+        var password1 = $("#password").val();
+        var password2 = $("#passwordTwo").val();
+        var sex = $("#sex").val();
+        var phone_number = $("#phone_number").val();
+        var id_number = $("#id_number").val()
+        if (Number(password1) == Number(password2)) {
+            $.post("/addUser", {name: name, password: password1,
+                sex: sex, phone_number: phone_number, id_number: id_number}, function (res) {
+                if (res == true) {
+                    alert("注册成功");
+                    window.location.href = "/login";
+                } else {
+                    alert("注册失败，请检查数据重试");
+                }
+            })
+        } else {
+            alert("两次密码不一致！");
+        }
+    }
+</script>
+
+</html>
