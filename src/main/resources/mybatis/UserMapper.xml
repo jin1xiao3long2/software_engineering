@@ -6,6 +6,14 @@
     </insert>
 
     <select id="login" parameterType="csmen.group.project.entity.UserInfo" resultType="csmen.group.project.entity.UserInfo">
-        select id, name FROM user WHERE name = #{name} AND password = #{password}
+        select id,name FROM user WHERE name = #{name} AND password = #{password}
     </select>
+
+    <select id="findByid" parameterType="java.lang.Integer" resultType="csmen.group.project.entity.UserInfo">
+      SELECT * FROM user where id = #{id}
+    </select>
+
+    <update id="updateUser" parameterType="csmen.group.project.entity.UserInfo">
+      update user SET name=#{name},sex=#{sex},phone_number=#{phone_number},id_number=#{id_number} WHERE id = #{id}
+    </update>
 </mapper>

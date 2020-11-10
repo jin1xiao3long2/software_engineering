@@ -24,11 +24,12 @@
         </ul>
     </div>
     <form  th:action="@{/login}" method="post">
+        <a th:if="${session.aname} == null">游客</a>
         <input th:if="${session.aname} == null"  type="submit" value="登陆/注册">
     </form>
 
     <div th:if="${session.aname} != null" >　　　　　　　　<!--下面th:href里有两个可变参数-->
-        <a th:action="@{/settings}"   th:text="${session.aname}"></a>
+        <a th:href="@{'/settings/'+${session.id}}"  th:text="${session.aname}"></a>
         <form th:action="@{/gologout}" method="post">
             <input type="submit" value="注销"/>
         </form>

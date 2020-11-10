@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>修改用户</title>
+    <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
 </head>
 <body>
-<a href="/">settings</a>
+<h2>这是修改页面</h2>
+<input  type="hidden" id="id" th:value="${user.id}"><br><br>
+请输入姓名：<input  id="name" th:value="${user.name}"/><br><br>
+请输入手机号：<input id="phone_number" th:value="${user.phone_number}"/><br><br>
+请输入身份证号：<input id="id_number" th:value="${user.id_number}"/>
+请选择性别：<select id="sex" style="width: 173px">
+    <option value="男">男</option>
+    <option value="女">女</option>
+</select><br><br>
+<button onclick="goupdate()">修改</button> 
+<button  name="button"  onclick="javascript:history.back(-1);">返回</button>
 </body>
+<script>
+    function goupdate() {
+        var id=$("#id").val();
+        var name = $("#name").val();
+        var sex = $("#sex").val();
+        var phone_number = $("#phone_number").val();
+        var id_number = $("#id_number").val();
+        $.post("/update",{id:id, name:name,sex:sex,
+            phone_number:phone_number,id_number:id_number},function (res) {
+            if (res==true) {
+                alert("修改成功");
+                window.location.href="redirect:/settings";
+            }else {
+                alert("修改失败，请检查数据重试！");
+            }
+        })
+    }
+</script>
 </html>
