@@ -41,6 +41,15 @@
             alert("两次密码不一致！");
         }
     }
+    //电话验证
+    //身份证验证
+    function checkPhone(phone_number){
+        if(!(/^1[3456789]d{9}$/.test(phone_number))){
+            alert("手机号码有误，请重填");
+            return false;
+        }
+        return true;
+    }
 </script>
 
 </html>

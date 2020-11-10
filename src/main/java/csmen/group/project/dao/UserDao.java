@@ -17,6 +17,10 @@ public interface UserDao {
 
     int updateUser(UserInfo user);
 
+    UserInfo findByname(UserInfo user);
+
+    int changePasswd(UserInfo user);
+
 //    int delUser(Integer id);
 
 }

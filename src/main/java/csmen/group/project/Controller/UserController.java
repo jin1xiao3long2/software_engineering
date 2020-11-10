@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class myController {
+public class UserController {
 
     //    @Resource
 //    private AdminDao ad;
@@ -35,16 +35,16 @@ public class myController {
     @RequestMapping("/gologin")
     public String gologin(UserInfo user, HttpServletRequest request, Model model) {
         UserInfo uu = ud.login(user);
-        Integer id = uu.getId();
         if(uu == null){
             return "public/Fail";
         }
+        Integer id = uu.getId();
         HttpSession session = request.getSession();
         session.setAttribute("aname",user.getName());
         session.setAttribute("apassword", user.getPassword());
         session.setAttribute("id",id);
 //        get image
-        model.addAttribute("user",user);
+        model.addAttribute("user",uu);
         return "redirect:/";
     }
 
@@ -76,6 +76,17 @@ public class myController {
         return "GetPassword";
     }
 
+    @RequestMapping("/changePassword")
+    public String changePassword(UserInfo user, Model model) {
+        UserInfo uu = ud.findByname(user);
+        if(uu == null){
+            return "public/Fail";
+        }
+//        get image
+        model.addAttribute("user",uu);
+        return "/ChangePassword";
+    }
+
     @RequestMapping("/addUser")
     @ResponseBody
     public boolean addUser(UserInfo user) {
@@ -89,13 +100,24 @@ public class myController {
     @RequestMapping("/update")//修改
     @ResponseBody
     public boolean updateUser(UserInfo user) {
-        System.out.println(user.getId()+user.getId_number()+user.getSex()+user.getPhone_number());
         int i = ud.updateUser(user);
         if (i > 0) {
             return true;
         } else {
             return false;
         }
+    }
+
+    @RequestMapping("/changePasswd")
+    @ResponseBody
+    public boolean changePasswd(UserInfo user){
+        System.out.println(user.getId()+user.getPassword());
+        int i = ud.changePasswd(user);
+        System.out.println(user.getId()+user.getPassword());
+        if(i > 0)
+            return true;
+        else
+            return false;
     }
 //    @RequestMapping("gologin") 进行用户检测判断
 }
