@@ -29,7 +29,9 @@
     </form>
 
     <div th:if="${session.aname} != null" >　　　　　　　　<!--下面th:href里有两个可变参数-->
-        <a th:href="@{'/settings/'+${session.id}}"  th:text="${session.aname}"></a>
+        <a th:text="${session.type}"></a>
+        <a th:if="${session.type} == 'doctor'" th:text="${session.aname}"></a>
+        <a th:if="${session.type} == 'user'" th:href="@{'/settings/'+${session.id}}"  th:text="${session.aname}"></a>
         <form th:action="@{/gologout}" method="post">
             <input type="submit" value="注销"/>
         </form>

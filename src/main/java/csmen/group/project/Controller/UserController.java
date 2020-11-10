@@ -1,6 +1,8 @@
 package csmen.group.project.Controller;
 
+import csmen.group.project.dao.DoctorDao;
 import csmen.group.project.dao.UserDao;
+import csmen.group.project.entity.DocterInfo;
 import csmen.group.project.entity.UserInfo;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class UserController {
 //    private AdminDao ad;
     @Resource
     private UserDao ud;
+    @Resource
+    private DoctorDao dd;
 
     @RequestMapping("")
     public String HomePage() {
@@ -37,22 +41,43 @@ public class UserController {
                           @RequestParam("password") String password,
                           @RequestParam("type") String type,
                           HttpServletRequest request, Model model) {
-        UserInfo user = new UserInfo();
-        user.setName(name);
-        user.setPassword(password);
-        UserInfo uu = ud.login(user);
-        if(uu == null){
-            model.addAttribute("msg","Login Error");
+        Integer id;
+        HttpSession session = request.getSession();
+        if (type.equals("user")) {
+            UserInfo user = new UserInfo();
+            user.setName(name);
+            user.setPassword(password);
+            UserInfo uu = ud.login(user);
+            if (uu == null) {
+                model.addAttribute("msg", "Login Error");
+                return "public/Fail";
+            }
+            id = uu.getId();
+            session.setAttribute("aname",user.getName());
+            session.setAttribute("apassword", user.getPassword());
+            model.addAttribute("loginer",uu);
+        } else if (type.equals("doctor")){
+            DocterInfo doctor = new DocterInfo();
+            doctor.setName(name);
+            doctor.setPassword(password);
+            DocterInfo du = dd.login(doctor);
+            if(doctor == null){
+                model.addAttribute("msg", "Login Error");
+                return "public/Fail";
+            }
+            id = du.getDID();
+            session.setAttribute("aname",doctor.getName());
+            session.setAttribute("apassword", doctor.getPassword());
+            model.addAttribute("loginer",du);
+        } else{
+            model.addAttribute("msg", "Login unknown error");
             return "public/Fail";
         }
-        Integer id = uu.getId();
-        HttpSession session = request.getSession();
-        session.setAttribute("aname",user.getName());
-        session.setAttribute("apassword", user.getPassword());
+
         session.setAttribute("id",id);
         session.setAttribute("type",type);
 //        get image
-        model.addAttribute("user",uu);
+
         return "redirect:/";
     }
 
