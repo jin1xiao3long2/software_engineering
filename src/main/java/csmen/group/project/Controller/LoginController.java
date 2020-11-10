@@ -2,7 +2,7 @@ package csmen.group.project.Controller;
 
 import csmen.group.project.dao.DoctorDao;
 import csmen.group.project.dao.UserDao;
-import csmen.group.project.entity.DocterInfo;
+import csmen.group.project.entity.DoctorInfo;
 import csmen.group.project.entity.UserInfo;
 
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class UserController {
+public class LoginController {
 
     //    @Resource
 //    private AdminDao ad;
@@ -50,39 +50,39 @@ public class UserController {
             UserInfo uu = ud.login(user);
             if (uu == null) {
                 model.addAttribute("msg", "Login Error");
-                return "public/Fail";
+                return "Public/Fail";
             }
             id = uu.getId();
-            session.setAttribute("aname",user.getName());
+            session.setAttribute("aname", user.getName());
             session.setAttribute("apassword", user.getPassword());
-            model.addAttribute("loginer",uu);
-        } else if (type.equals("doctor")){
-            DocterInfo doctor = new DocterInfo();
+            model.addAttribute("loginer", uu);
+        } else if (type.equals("doctor")) {
+            DoctorInfo doctor = new DoctorInfo();
             doctor.setName(name);
             doctor.setPassword(password);
-            DocterInfo du = dd.login(doctor);
-            if(doctor == null){
+            DoctorInfo du = dd.login(doctor);
+            if (doctor == null) {
                 model.addAttribute("msg", "Login Error");
-                return "public/Fail";
+                return "Public/Fail";
             }
             id = du.getDID();
-            session.setAttribute("aname",doctor.getName());
+            session.setAttribute("aname", doctor.getName());
             session.setAttribute("apassword", doctor.getPassword());
-            model.addAttribute("loginer",du);
-        } else{
+            model.addAttribute("loginer", du);
+        } else {
             model.addAttribute("msg", "Login unknown error");
-            return "public/Fail";
+            return "Public/Fail";
         }
 
-        session.setAttribute("id",id);
-        session.setAttribute("type",type);
+        session.setAttribute("id", id);
+        session.setAttribute("type", type);
 //        get image
 
         return "redirect:/";
     }
 
     @RequestMapping("/gologout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }
@@ -97,10 +97,10 @@ public class UserController {
     public String settings(@PathVariable("id") Integer id, Model model) {
         UserInfo user = ud.findByid(id);
         user.setId(id);
-        if(user == null){
-            return "public/Fail";
+        if (user == null) {
+            return "Public/Fail";
         }
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "Login/Settings";
     }
 
@@ -112,11 +112,11 @@ public class UserController {
     @RequestMapping("/changePassword")
     public String changePassword(UserInfo user, Model model) {
         UserInfo uu = ud.findByname(user);
-        if(uu == null){
-            return "public/Fail";
+        if (uu == null) {
+            return "Public/Fail";
         }
 //        get image
-        model.addAttribute("user",uu);
+        model.addAttribute("user", uu);
         return "Login/ChangePassword";
     }
 
@@ -143,11 +143,11 @@ public class UserController {
 
     @RequestMapping("/changePasswd")
     @ResponseBody
-    public boolean changePasswd(UserInfo user){
-        System.out.println(user.getId()+user.getPassword());
+    public boolean changePasswd(UserInfo user) {
+        System.out.println(user.getId() + user.getPassword());
         int i = ud.changePasswd(user);
-        System.out.println(user.getId()+user.getPassword());
-        if(i > 0)
+        System.out.println(user.getId() + user.getPassword());
+        if (i > 0)
             return true;
         else
             return false;

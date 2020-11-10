@@ -1,9 +1,14 @@
 package csmen.group.project.dao;
 
-import csmen.group.project.entity.DocterInfo;
+import csmen.group.project.entity.DoctorInfo;
 
+import java.util.List;
 
 public interface DoctorDao {
 
-    DocterInfo login(DocterInfo docter);
+    DoctorInfo login(DoctorInfo docter);
+
+    List<DoctorInfo> findAll();
+
+    List<DoctorInfo> findByHID(Integer HID);
 }

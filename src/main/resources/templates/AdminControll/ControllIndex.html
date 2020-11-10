@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>a {
+        text-decoration: none
+    }</style>
+    <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+</head>
+<body>
+欢迎你 ：<input th:value="${admin.name}" style="border: none; outline: none"/><br><br><br><br>
+<select th:if="${admin.privilege} == 'Hyper'" onchange="change_table(this.options[this.options.selectedIndex].value)">
+    <option value="1">管理员</option>
+    <option value="2">医院</option>
+    <option value="3">社区</option>
+</select>
+<h2>人员信息维护</h2>
+
+<!--第一个表格-->
+<table width="888" border="1" id = "tab1" th:style="${admin.privilege=='Hyper'}?'':'display:none'">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>权限</th>
+        <th>HID</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="admin:${alist}">
+        <td align="center" th:text="${admin.id}"></td>
+        <td align="center" th:text="${admin.name}"></td>
+        <td align="center" th:text="${admin.privilege}"></td>
+        <td align="center" th:text="${admin.HID}"></td>
+    </tr>
+    </thead>
+</table>
+
+
+<!--第二个表格-->
+<table width="888" border="1" id="tab2" th:style="${admin.privilege=='Hospital'}?'':'display:none'">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>手机号</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="doctor:${dlist}">
+        <td align="center" th:text="${doctor.DID}"></td>
+        <td align="center" th:text="${doctor.name}"></td>
+        <td align="center" th:text="${doctor.phone_number}"></td>
+        <td align="center" th:text="${doctor.sex}"></td>
+    </tr>
+    </thead>
+</table>
+
+<!--第三个表格-->
+<table width="888" border="1" id = "tab3" th:style="${admin.privilege=='Commulity'}?'':'display:none'">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>手机号</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="user:${ulist}">
+        <td align="center" th:text="${user.id}"></td>
+        <td align="center" th:text="${user.name}"></td>
+        <td align="center" th:text="${user.phone_number}"></td>
+        <td align="center" th:text="${user.sex}"></td>
+    </tr>
+    </thead>
+</table>
+</body>
+
+<script>
+    function change_table(v){
+        for(var i=1;i<4;i++)
+        {
+            document.getElementById("tab"+i).style.display="none";
+        }
+        if(v!="" && !isNaN(v)){
+            document.getElementById("tab"+v).style.display="";
+        }
+    }
+</script>
+</html>

@@ -1,6 +1,6 @@
 package csmen.group.project.entity;
 
-public class DocterInfo {
+public class DoctorInfo {
     private Integer DID;
     private Integer HID;
     private String name;
@@ -119,7 +119,7 @@ public class DocterInfo {
         this.status = status;
     }
 
-    public DocterInfo(Integer DID, Integer HID, String name, String password, String sex, String phone_number, String id_number, String faculty, String profession, String political, String expertise, String description, String status) {
+    public DoctorInfo(Integer DID, Integer HID, String name, String password, String sex, String phone_number, String id_number, String faculty, String profession, String political, String expertise, String description, String status) {
         this.DID = DID;
         this.HID = HID;
         this.name = name;
@@ -135,6 +135,6 @@ public class DocterInfo {
         this.status = status;
     }
 
-    public DocterInfo() {
+    public DoctorInfo() {
     }
 }

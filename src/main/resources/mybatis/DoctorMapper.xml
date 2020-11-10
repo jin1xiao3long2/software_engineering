@@ -5,7 +5,15 @@
 <!--       INSERT INTO user(name,password,sex,phone_number,id_number) VALUES (#{name},#{password},#{sex},#{phone_number},#{id_number})-->
 <!--    </insert>-->
 
-    <select id="login" parameterType="csmen.group.project.entity.DocterInfo" resultType="csmen.group.project.entity.DocterInfo">
+    <select id="findAll" resultType="csmen.group.project.entity.DoctorInfo">
+      select * from doctor
+    </select>
+
+    <select id="findByHID" resultType="csmen.group.project.entity.DoctorInfo">
+      select * from doctor WHERE HID = #{HID}
+    </select>
+
+    <select id="login" parameterType="csmen.group.project.entity.DoctorInfo" resultType="csmen.group.project.entity.DoctorInfo">
         select DID,name FROM doctor WHERE name = #{name} AND password = #{password}
     </select>
 
