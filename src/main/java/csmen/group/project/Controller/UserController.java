@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -21,7 +22,6 @@ public class UserController {
     @Resource
     private UserDao ud;
 
-
     @RequestMapping("")
     public String HomePage() {
         return "Home";
@@ -29,13 +29,20 @@ public class UserController {
 
     @RequestMapping("/login")
     public String login() {
-        return "Login";
+        return "Login/Login";
     }
 
     @RequestMapping("/gologin")
-    public String gologin(UserInfo user, HttpServletRequest request, Model model) {
+    public String gologin(@RequestParam("name") String name,
+                          @RequestParam("password") String password,
+                          @RequestParam("type") String type,
+                          HttpServletRequest request, Model model) {
+        UserInfo user = new UserInfo();
+        user.setName(name);
+        user.setPassword(password);
         UserInfo uu = ud.login(user);
         if(uu == null){
+            model.addAttribute("msg","Login Error");
             return "public/Fail";
         }
         Integer id = uu.getId();
@@ -43,6 +50,7 @@ public class UserController {
         session.setAttribute("aname",user.getName());
         session.setAttribute("apassword", user.getPassword());
         session.setAttribute("id",id);
+        session.setAttribute("type",type);
 //        get image
         model.addAttribute("user",uu);
         return "redirect:/";
@@ -57,7 +65,7 @@ public class UserController {
 
     @RequestMapping("/register")
     public String register() {
-        return "Register";
+        return "Login/Register";
     }
 
     @RequestMapping("/settings/{id}")
@@ -68,12 +76,12 @@ public class UserController {
             return "public/Fail";
         }
         model.addAttribute("user",user);
-        return "Settings";
+        return "Login/Settings";
     }
 
     @RequestMapping("/getPassword")
     public String getPassword() {
-        return "GetPassword";
+        return "Login/GetPassword";
     }
 
     @RequestMapping("/changePassword")
@@ -84,7 +92,7 @@ public class UserController {
         }
 //        get image
         model.addAttribute("user",uu);
-        return "/ChangePassword";
+        return "Login/ChangePassword";
     }
 
     @RequestMapping("/addUser")
