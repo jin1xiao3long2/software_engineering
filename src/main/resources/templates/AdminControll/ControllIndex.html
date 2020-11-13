@@ -17,6 +17,7 @@
 </select>
 <h2>人员信息维护</h2>
 
+<button><a href="/goadddoctor">添加</a></button>
 <!--第一个表格-->
 <table width="888" border="1" id = "tab1" th:style="${admin.privilege=='Hyper'}?'':'display:none'">
     <thead>
@@ -32,6 +33,9 @@
         <td align="center" th:text="${admin.name}"></td>
         <td align="center" th:text="${admin.privilege}"></td>
         <td align="center" th:text="${admin.HID}"></td>
+        <td align="center"><a th:href="@{'/goupdateadmin/'+${admin.id}}">修改</a>
+            <a th:href="@{'/godeladmin/'+${admin.id}}" onclick="javascript:return del();">删除</a>
+        </td>
     </tr>
     </thead>
 </table>
@@ -41,20 +45,25 @@
 <table width="888" border="1" id="tab2" th:style="${admin.privilege=='Hospital'}?'':'display:none'">
     <thead>
     <tr>
-        <th>id</th>
+        <th>HID</th>
         <th>姓名</th>
         <th>手机号</th>
         <th>性别</th>
         <th>操作</th>
     </tr>
     <tr th:each="doctor:${dlist}">
-        <td align="center" th:text="${doctor.DID}"></td>
+        <td align="center" th:text="${doctor.HID}"></td>
         <td align="center" th:text="${doctor.name}"></td>
         <td align="center" th:text="${doctor.phone_number}"></td>
         <td align="center" th:text="${doctor.sex}"></td>
+        <td align="center"><a th:href="@{'/goupdatedoctor/'+${doctor.DID}}">修改</a>
+            <a th:href="@{'/godeldoctor/'+${doctor.DID}}" onclick="javascript:return del();">删除</a>
+        </td>
     </tr>
     </thead>
 </table>
+
+
 
 <!--第三个表格-->
 <table width="888" border="1" id = "tab3" th:style="${admin.privilege=='Commulity'}?'':'display:none'">
@@ -71,9 +80,13 @@
         <td align="center" th:text="${user.name}"></td>
         <td align="center" th:text="${user.phone_number}"></td>
         <td align="center" th:text="${user.sex}"></td>
+        <td align="center"><a th:href="@{'/goupdateuser/'+${user.id}}" >修改</a>
+            <a th:href="@{'/godeluser/'+${user.id}}" onclick="javascript:return del();">删除</a>
+        </td>
     </tr>
     </thead>
 </table>
+
 </body>
 
 <script>
@@ -84,6 +97,15 @@
         }
         if(v!="" && !isNaN(v)){
             document.getElementById("tab"+v).style.display="";
+        }
+    }
+
+    function del() {
+        var msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg)==true){
+            return true;
+        }else{
+            return false;
         }
     }
 </script>
