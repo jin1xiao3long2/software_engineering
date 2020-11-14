@@ -11,8 +11,9 @@
 请输入姓名：<input  id="name" th:value="${doctor.name}"/><br><br>
 请输入faculty：<input id="faculty" th:value="${doctor.faculty}"/><br><br>
 请选择性别：<select id="sex" style="width: 173px">
-    <option value="男">男</option>
-    <option value="女">女</option>
+    <option value="男" th:selected="${doctor.sex} eq '男'">男</option>
+    <option value="女" th:selected="${doctor.sex} eq '女'">女</option>
+</select>
 请输入profession：<input id="profession" th:value="${doctor.profession}"/><br><br>
 请输入political：<input id="political" th:value="${doctor.political}"/><br><br>
 请输入expertise：<input id="expertise" th:value="${doctor.expertise}"/><br><br>

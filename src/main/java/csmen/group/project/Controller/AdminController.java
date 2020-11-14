@@ -108,17 +108,20 @@ public class AdminController {
         return "AdminControll/ControllIndex";
     }
 
-    @RequestMapping("/goupdatedoctor/{DID}")
-    public String GoUpdateDoctor(@PathVariable("DID") Integer did, Model model){
-        DoctorInfo doctor = dd.findByDID(did);
-        model.addAttribute("doctor",doctor);
-        return "AdminControll/Update/UpdateDoctor";
+    @RequestMapping("/goadddoctor")
+    public String GoAddDoctor(AdminInfo admin, Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        admin.setName((String)session.getAttribute("aname"));
+        admin.setPassword((String)session.getAttribute("apassword"));
+        AdminInfo aa = ad.login(admin);
+        model.addAttribute("admin",aa);
+        return "AdminControll/Add/AddDoctor";
     }
 
-    @RequestMapping("/updatedoctor")
+    @RequestMapping("/adddoctor")
     @ResponseBody
-    public boolean updatedoctor(DoctorInfo doctor){
-        int i = dd.updateDoctor(doctor);
+    public boolean AddDoctor(DoctorInfo doctor){
+        int i = dd.addDoctor(doctor);
         if(i > 0)
             return true;
         else
@@ -132,23 +135,110 @@ public class AdminController {
         return "Public/Success";
     }
 
-    @RequestMapping("/goadddoctor")
-    public String GoAddDoctor(AdminInfo admin, Model model, HttpServletRequest request){
-        HttpSession session = request.getSession();
-        admin.setName((String)session.getAttribute("aname"));
-        admin.setPassword((String)session.getAttribute("apassword"));
-        AdminInfo aa = ad.login(admin);
-        model.addAttribute("admin",aa);
-        return "AdminControll/Add/AddDoctor";
+    @RequestMapping("/goupdatedoctor/{DID}")
+    public String GoUpdateDoctor(@PathVariable("DID") Integer did, Model model){
+        DoctorInfo doctor = dd.findByDID(did);
+        model.addAttribute("doctor",doctor);
+        return "AdminControll/Update/UpdateDoctor";
     }
 
-    @RequestMapping("/adddoctor")
+    @RequestMapping("/updatedoctor")
     @ResponseBody
-    public boolean addDoctor(DoctorInfo doctor){
-        int i = dd.addDoctor(doctor);
+    public boolean UpdateDoctor(DoctorInfo doctor){
+        int i = dd.updateDoctor(doctor);
         if(i > 0)
             return true;
         else
             return false;
     }
+
+    @RequestMapping("/goadduser")
+    public String GoAddUser(AdminInfo admin, Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        admin.setName((String)session.getAttribute("aname"));
+        admin.setPassword((String)session.getAttribute("apassword"));
+        AdminInfo aa = ad.login(admin);
+        model.addAttribute("admin",aa);
+        return "AdminControll/Add/AddUser";
+    }
+
+    @RequestMapping("/adduser")
+    @ResponseBody
+    public boolean AddUser(UserInfo user){
+        int i = ud.addUser(user);
+        if(i > 0)
+            return true;
+        else
+            return false;
+    }
+
+    @RequestMapping("/godeldoctor/{id}")
+    public String GoDelUser(@PathVariable("id") Integer id, Model model){
+        model.addAttribute("href","/adminindex");
+        ud.delUser(id);
+        return "Public/Success";
+    }
+
+    @RequestMapping("/goupdateuser/{id}")
+    public String GoUpdateUser(@PathVariable("id") Integer id, Model model){
+        UserInfo user = ud.findByid(id);
+        model.addAttribute("user",user);
+        return "AdminControll/Update/UpdateUser";
+    }
+
+    @RequestMapping("/updateuser")
+    @ResponseBody
+    public boolean UpdateUser(UserInfo user){
+        int i = ud.updateUser(user);
+        if(i > 0)
+            return true;
+        else
+            return false;
+    }
+
+    @RequestMapping("/goaddadmin")
+    public String GoAddAdmin(AdminInfo admin, Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        admin.setName((String)session.getAttribute("aname"));
+        admin.setPassword((String)session.getAttribute("apassword"));
+        AdminInfo aa = ad.login(admin);
+        model.addAttribute("admin",aa);
+        return "AdminControll/Add/AddAdmin";
+    }
+
+    @RequestMapping("/addadmin")
+    @ResponseBody
+    public boolean AddAdmin(AdminInfo admin){
+        int i = ad.addAdmin(admin);
+        if(i > 0)
+            return true;
+        else
+            return false;
+    }
+
+    @RequestMapping("/godeladmin/{id}")
+    public String GoDelAdmin(@PathVariable("id") Integer id, Model model){
+        model.addAttribute("href","/adminindex");
+        ad.delAdmin(id);
+        return "Public/Success";
+    }
+
+    @RequestMapping("/goupdateadmin/{id}")
+    public String GoUpdateAdmin(@PathVariable("id") Integer id, Model model){
+        AdminInfo admin = ad.findByid(id);
+        model.addAttribute("admin",admin);
+        return "AdminControll/Update/UpdateAdmin";
+    }
+
+    @RequestMapping("/updateadmin")
+    @ResponseBody
+    public boolean UpdateAdmin(AdminInfo admin){
+        int i = ad.updateAdmin(admin);
+        if(i > 0)
+            return true;
+        else
+            return false;
+    }
+
+
 }

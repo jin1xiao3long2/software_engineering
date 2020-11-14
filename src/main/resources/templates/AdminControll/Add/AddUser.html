@@ -7,23 +7,12 @@
 </head>
 <body>
 <h2>我是添加页面</h2>
-<div th:if="${admin.privilege} == 'Hyper'">
-    请输入HID: <input  id="HID" type="text"/><br><br>
-</div>
-<div th:if="${admin.privilege} == 'Hospital'">
-    <input  type="hidden" id="HID" th:value="${admin.HID}"><br><br>
-</div>
+
 请输入姓名：<input  id="name" type="text"/><br><br>
-请输入faculty：<input id="faculty" type="text"/><br><br>
 请选择性别：<select id="sex" style="width: 173px">
     <option value="男">男</option>
     <option value="女">女</option>
 </select><br><br>
-请输入profession：<input id="profession" type="text"/><br><br>
-请输入political：<input id="political" type="text"/><br><br>
-请输入expertise：<input id="expertise" type="text"/><br><br>
-请输入description：<input id="description" type="text"/><br><br>
-请输入status：<input id="status" type="text"/><br><br>
 请输入password：<input id="password1" type="text"/><br><br>
 请再次输入password <input id="password2" type="text"/><br><br>
 请输入phone_number：<input id="phone_number" type="text"/><br><br>
@@ -34,24 +23,16 @@
 <script>
     function goadd() {
         //HID
-        var HID = $("#HID").val();
         var name = $("#name").val();
         var sex = $("#sex").val();
-        var faculty = $("#faculty").val();
-        var profession = $("#profession").val();
-        var political = $("#political").val();
-        var expertise = $("#expertise").val();
-        var description = $("#description").val();
-        var status = $("#status").val();
         var password1 = $("#password1").val();
         var password2 = $("#password2").val();
         var phone_number = $("#phone_number").val();
         var id_number = $("#id_number").val();
         if(Number(password1) == Number(password2)){
-            $.post("/adddoctor", {
-                HID: HID, name: name, faculty: faculty, profession: profession,
-                political: political, expertise: expertise, description: description, status: status,
-                password: password1, phone_number: phone_number, id_number: id_number, sex: sex
+            $.post("/adduser", {
+                name: name, password: password1, phone_number: phone_number,
+                id_number: id_number, sex: sex
             }, function (res) {
                 if (res == true) {
                     alert("添加成功")

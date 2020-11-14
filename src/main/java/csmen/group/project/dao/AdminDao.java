@@ -8,4 +8,12 @@ public interface AdminDao {
     List<AdminInfo> findAll();
 
     AdminInfo login(AdminInfo admin);
+
+    int addAdmin(AdminInfo admin);
+
+    int delAdmin(Integer id);
+
+    AdminInfo findByid(Integer id);
+
+    int updateAdmin(AdminInfo admin);
 }

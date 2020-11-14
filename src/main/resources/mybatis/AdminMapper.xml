@@ -9,5 +9,19 @@
         select id,name,privilege,HID FROM admin WHERE name = #{name} AND password = #{password}
     </select>
 
+    <insert id="addAdmin" parameterType="csmen.group.project.entity.AdminInfo">
+       INSERT INTO admin(name,password,privilege,HID) VALUES (#{name},#{password},#{privilege},#{HID})
+    </insert>
 
+    <delete id="delAdmin" parameterType="java.lang.Integer">
+     DELETE from admin WHERE id = #{id}
+    </delete>
+
+    <select id="findByid" parameterType="java.lang.Integer" resultType="csmen.group.project.entity.AdminInfo">
+      SELECT * FROM admin where id = #{id}
+    </select>
+
+    <update id="updateAdmin" parameterType="csmen.group.project.entity.AdminInfo">
+      update user SET name=#{name}, password=#{password}, privilege=#{privilege},HID=#{HID} WHERE id = #{id}
+    </update>
 </mapper>

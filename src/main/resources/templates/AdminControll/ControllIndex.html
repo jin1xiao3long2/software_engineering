@@ -17,7 +17,9 @@
 </select>
 <h2>人员信息维护</h2>
 
-<button><a href="/goadddoctor">添加</a></button>
+<button><a href="/goadddoctor">添加医生</a></button>
+<button><a href="/goadduser">添加用户</a></button>
+<button><a href="/goaddadmin">添加管理员</a></button>
 <!--第一个表格-->
 <table width="888" border="1" id = "tab1" th:style="${admin.privilege=='Hyper'}?'':'display:none'">
     <thead>
@@ -108,5 +110,6 @@
             return false;
         }
     }
+
 </script>
 </html>

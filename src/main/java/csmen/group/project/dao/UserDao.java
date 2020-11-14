@@ -21,6 +21,6 @@ public interface UserDao {
 
     int changePasswd(UserInfo user);
 
-//    int delUser(Integer id);
+    int delUser(Integer id);
 
 }
