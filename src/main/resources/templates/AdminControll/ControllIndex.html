@@ -11,7 +11,7 @@
 <body>
 欢迎你 ：<input th:value="${admin.name}" style="border: none; outline: none"/><br><br><br><br>
 <select th:if="${admin.privilege} == 'Hyper'" onchange="change_table(this.options[this.options.selectedIndex].value)">
-    <option value="1">管理员</option>
+    <option value="1" selected>管理员</option>
     <option value="2">医院</option>
     <option value="3">社区</option>
 </select>
