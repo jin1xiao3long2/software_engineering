@@ -30,4 +30,8 @@
     <update id="changePasswd" parameterType="csmen.group.project.entity.UserInfo">
       update user SET password=#{password}WHERE id = #{id}
     </update>
+
+    <delete id="delUser" parameterType="java.lang.Integer">
+     DELETE from user WHERE id = #{id}
+    </delete>
 </mapper>
