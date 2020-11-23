@@ -20,6 +20,15 @@
 <button><a href="/goadddoctor">添加医生</a></button>
 <button><a href="/goadduser">添加用户</a></button>
 <button><a href="/goaddadmin">添加管理员</a></button>
+
+<!--查询框-->
+请输入查询用户名<input id="query_id">
+请选择查询性别<select id="query_sex" style="width: 173px">
+    <option value="*" >不限</option>
+    <option value="男">男</option>
+    <option value="女">女</option>
+</select>
+
 <!--第一个表格-->
 <table width="888" border="1" id = "tab1" th:style="${admin.privilege=='Hyper'}?'':'display:none'">
     <thead>
@@ -110,6 +119,7 @@
             return false;
         }
     }
+
 
 </script>
 </html>

@@ -14,19 +14,19 @@
     </select>
 
     <select id="login" parameterType="csmen.group.project.entity.DoctorInfo" resultType="csmen.group.project.entity.DoctorInfo">
-        select DID,name FROM doctor WHERE name = #{name} AND password = #{password}
+        select id,name FROM doctor WHERE name = #{name} AND password = #{password}
     </select>
 
-    <select id="findByDID" parameterType="java.lang.Integer" resultType="csmen.group.project.entity.DoctorInfo">
-      SELECT * FROM doctor where DID = #{DID}
+    <select id="findByid" parameterType="java.lang.Integer" resultType="csmen.group.project.entity.DoctorInfo">
+      SELECT * FROM doctor where id = #{id}
     </select>
 
     <update id="updateDoctor" parameterType="csmen.group.project.entity.DoctorInfo">
-      update doctor SET name=#{name}, faculty=#{faculty}, profession=#{profession},political=#{political}, expertise=#{expertise}, description=#{description}, status=#{status},password=#{password}, phone_number=#{phone_number},id_number=#{id_number},sex=#{sex} WHERE DID=#{DID}
+      update doctor SET name=#{name}, faculty=#{faculty}, profession=#{profession},political=#{political}, expertise=#{expertise}, description=#{description}, status=#{status},password=#{password}, phone_number=#{phone_number},id_number=#{id_number},sex=#{sex} WHERE id=#{id}
     </update>
 
     <delete id="delDoctor" parameterType="java.lang.Integer">
-     DELETE from doctor WHERE DID = #{DID}
+     DELETE from doctor WHERE id = #{id}
     </delete>
 
     <insert id="addDoctor" parameterType="csmen.group.project.entity.DoctorInfo">

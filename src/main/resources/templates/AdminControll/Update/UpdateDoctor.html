@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>这是修改页面</h2>
-<input  type="hidden" id="DID" th:value="${doctor.DID}"><br><br>
+<input  type="hidden" id="id" th:value="${doctor.id}"><br><br>
 请输入姓名：<input  id="name" th:value="${doctor.name}"/><br><br>
 请输入faculty：<input id="faculty" th:value="${doctor.faculty}"/><br><br>
 请选择性别：<select id="sex" style="width: 173px">
@@ -28,7 +28,7 @@
 </body>
 <script>
     function goupdate() {
-        var DID=$("#DID").val();
+        var id=$("#id").val();
         var name = $("#name").val();
         var sex = $("#sex").val();
         var faculty = $("#faculty").val();
@@ -40,7 +40,7 @@
         var password = $("#password").val();
         var phone_number = $("#phone_number").val();
         var id_number = $("#id_number").val();
-        $.post("/updatedoctor",{DID:DID,name:name,faculty:faculty,profession:profession,
+        $.post("/updatedoctor",{id:id,name:name,faculty:faculty,profession:profession,
             political:political,expertise:expertise,description:description,status:status,
         password:password,phone_number:phone_number,id_number:id_number,sex:sex},function (res) {
             if (res==true) {

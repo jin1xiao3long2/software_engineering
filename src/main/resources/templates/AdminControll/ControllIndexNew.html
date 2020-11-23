@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>a {
+        text-decoration: none
+    }</style>
+    <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+</head>
+<body>
+欢迎你 ：<input th:value="${admin.name}" style="border: none; outline: none"/><br><br><br><br>
+
+<h2>人员信息维护</h2>
+<form action="/adminindexnew" method="post">
+    请输入用户名<input id = "name" name = "name"/>
+    请选择用户类型：<select id="type" name="type" style="width: 173px" th:if="${admin.privilege}=='Hyper'" >
+    <option value="admin" th:selected="${type}=='admin'">管理员</option>
+    <option value="doctor" th:selected="${type}=='doctor'">医生</option>
+    <option value="user" th:selected="${type}=='user'">用户</option>
+</select>
+    <input id = "type" name="type" th:if="${admin.privilege}!='Hyper'" style="display:none" value="doctor"></input>
+    <input type="submit" value="选择">
+</form>
+
+
+<table width="888" border="1" id="tab">
+    <thead>
+    <tr>
+        <td align="center">用户名</td>
+        <td align="center" th:if="${type}=='admin'">权限</td>
+        <td align="center" th:if="${type}!='admin'">电话号码</td>
+        <td align="center" th:if="${type}!='admin'">性别</td>
+        <td align="center">操作</td>
+    </tr>
+    <tr th:each="user:${list}">
+        <td align="center" th:text="${user.name}"></td>
+        <td align="center" th:if="${type}=='admin'" th:text="${user.privilege}"></td>
+        <td align="center" th:if="${type}!='admin'" th:text="${user.phone_number}"></td>
+        <td align="center" th:if="${type}!='admin'" th:text="${user.sex}"></td>
+        <td align="center"><a th:href="@{'/goupdate'+${type}+'/'+${user.id}}">修改</a>
+            <a th:href="@{'/godel'+${type}+'/'+${user}}" onclick="javascript:return del();">删除</a>
+        </td>
+    </tr>
+    </thead>
+</table>
+
+
+</body>
+
+<script>
+
+
+    function del() {
+        var msg = "您真的确定要删除吗？\n\n请确认！";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+</script>
+</html>

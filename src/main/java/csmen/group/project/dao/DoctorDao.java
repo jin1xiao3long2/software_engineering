@@ -13,11 +13,11 @@ public interface DoctorDao {
 
     List<DoctorInfo> findByHID(Integer HID);
 
-    DoctorInfo findByDID(Integer DID);
+    DoctorInfo findByid(Integer id);
 
     int updateDoctor(DoctorInfo doctor);
 
-    int delDoctor(Integer DID);
+    int delDoctor(Integer id);
 
     int addDoctor(DoctorInfo doctor);
 }
