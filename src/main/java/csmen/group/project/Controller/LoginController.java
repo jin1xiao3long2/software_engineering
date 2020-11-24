@@ -111,7 +111,7 @@ public class LoginController {
 
     @RequestMapping("/changePassword")
     public String changePassword(UserInfo user, Model model) {
-        UserInfo uu = ud.findByname(user);
+        UserInfo uu = ud.findBynameAndIDnumber(user);
         if (uu == null) {
             return "Public/Fail";
         }

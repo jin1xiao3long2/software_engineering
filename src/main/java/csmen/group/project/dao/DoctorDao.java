@@ -1,6 +1,7 @@
 package csmen.group.project.dao;
 
 import csmen.group.project.entity.DoctorInfo;
+import org.apache.ibatis.annotations.Param;
 
 import javax.print.Doc;
 import java.util.List;
@@ -12,6 +13,10 @@ public interface DoctorDao {
     List<DoctorInfo> findAll();
 
     List<DoctorInfo> findByHID(Integer HID);
+
+    List<DoctorInfo> findByname(String name);
+
+    List<DoctorInfo> findBynameAndHID(@Param("name")String name, @Param("HID")Integer HID);
 
     DoctorInfo findByid(Integer id);
 

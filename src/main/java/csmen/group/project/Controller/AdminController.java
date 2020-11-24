@@ -37,6 +37,7 @@ public class AdminController {
         return "AdminControll/AdminLogin";
     }
 
+    /*
     @RequestMapping("/admingologin")
     public String AdminGoLogin(AdminInfo admin,
                                HttpServletRequest request,
@@ -74,44 +75,9 @@ public class AdminController {
         return "AdminControll/ControllIndex";
     }
 
-    @RequestMapping("/adminindex")
-    public String AdminIndex(AdminInfo admin, Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        admin.setName((String) session.getAttribute("aname"));
-        admin.setPassword((String) session.getAttribute("apassword"));
-        AdminInfo aa = ad.login(admin);
-        if (aa == null) {
-            model.addAttribute("msg", "admin login error");
-            return "Public/Fail";
-        }
-        Integer HID = aa.getHID();
-        String privilege = aa.getPrivilege();
-        model.addAttribute("admin", aa);
-        List<UserInfo> userList = null;
-        List<DoctorInfo> doctorList = null;
-        List<AdminInfo> adminList = null;
-        if (privilege.equals("Hyper")) {
-            userList = ud.findAll();
-            doctorList = dd.findAll();
-            adminList = ad.findAll();
-            model.addAttribute("ulist", userList);
-            model.addAttribute("dlist", doctorList);
-            model.addAttribute("alist", adminList);
-        } else if (privilege.equals("Hospital")) {
-            doctorList = dd.findByHID(HID);
-            model.addAttribute("dlist", doctorList);
-        } else if (privilege.equals("Commulity")) {
-            userList = ud.findAll();
-            model.addAttribute("ulist", userList);
-        } else {
-            return "Public/Fail";
-        }
-        return "AdminControll/ControllIndex";
-    }
-
-
-    @RequestMapping("/admingologinnew")
-    public String AdminGoLoginNew(AdminInfo admin,
+ */
+    @RequestMapping("/admingologin")
+    public String AdminGoLogin(AdminInfo admin,
                                   HttpServletRequest request,
                                   Model model) {
         AdminInfo aa = ad.login(admin);
@@ -144,12 +110,14 @@ public class AdminController {
             return "Public/Fail";
         }
         model.addAttribute("type", type);
-        return "AdminControll/ControllIndexNew";
+        return "AdminControll/ControllIndex";
     }
 
-    @RequestMapping("/adminindexnew")
-    public String AdminIndexNew(AdminInfo admin, Model model, HttpServletRequest request,
-                                @RequestParam("type") String tt, @RequestParam("name") String name) {
+
+
+
+    @RequestMapping("/adminindex")
+    public String AdminIndex(AdminInfo admin, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         admin.setName((String) session.getAttribute("aname"));
         admin.setPassword((String) session.getAttribute("apassword"));
@@ -162,32 +130,6 @@ public class AdminController {
         //登录
         String type = null;
         String privilege = aa.getPrivilege();
-        if (tt != null) {
-            if (tt.equals("admin")) {
-                List<AdminInfo> adminList = ad.findAll();
-                model.addAttribute("list", adminList);
-                type = "admin";
-            } else if (tt.equals("doctor")) {
-                List<DoctorInfo> doctorList = null;
-                if(privilege.equals("Hospital")) {
-                    doctorList = dd.findByHID(aa.getHID());
-                } else if(privilege.equals("Hyper"));
-                {
-                    doctorList = dd.findAll();
-                }
-                model.addAttribute("list", doctorList);
-                type = "doctor";
-            } else if (tt.equals("user")) {
-                List<UserInfo> userList = ud.findAll();
-                model.addAttribute("list", userList);
-                type = "user";
-            } else {
-                model.addAttribute("msg", "can't find data");
-                return "Public/Fail";
-            }
-            model.addAttribute("type", type);
-            return "AdminControll/ControllIndexNew";
-        }
 
         if (aa.getPrivilege().equals("Hyper")) {
             List<AdminInfo> adminList = ad.findAll();
@@ -206,7 +148,71 @@ public class AdminController {
             return "Public/Fail";
         }
         model.addAttribute("type", type);
-        return "AdminControll/ControllIndexNew";
+        return "AdminControll/ControllIndex";
+    }
+
+    @RequestMapping("/adminindexquery")
+    public String AdminIndexQuery(AdminInfo admin, Model model, HttpServletRequest request,
+                                  @RequestParam("type") String tt, @RequestParam("name") String name){
+        HttpSession session = request.getSession();
+        admin.setName((String) session.getAttribute("aname"));
+        admin.setPassword((String) session.getAttribute("apassword"));
+        AdminInfo aa = ad.login(admin);
+        if (aa == null) {
+            model.addAttribute("msg", "admin login error");
+            return "Public/Fail";
+        }
+        model.addAttribute("admin", aa);
+        //登录
+        String type = null;
+        String privilege = aa.getPrivilege();
+        int size = 0;
+        if (tt != null) {
+            if (tt.equals("admin")) {
+                List<AdminInfo> adminList = null;
+                if(name.equals(""))
+                    adminList = ad.findAll();
+                else
+                    adminList = ad.findByname(name);
+                model.addAttribute("list", adminList);
+                type = "admin";
+                size = adminList.size();
+            } else if (tt.equals("doctor")) {
+                List<DoctorInfo> doctorList = null;
+                if(privilege.equals("Hospital")) {
+                    if(name.equals(""))
+                        doctorList = dd.findByHID(aa.getHID());
+                    else
+                        doctorList = dd.findBynameAndHID(name,aa.getHID());
+                } else if(privilege.equals("Hyper"));
+                {
+                    if(name.equals(""))
+                        doctorList = dd.findAll();
+                    else
+                        doctorList = dd.findByname(name);
+                }
+                model.addAttribute("list", doctorList);
+                type = "doctor";
+                size = doctorList.size();
+            } else if (tt.equals("user")) {
+                List<UserInfo> userList = null;
+                if(name.equals(""))
+                    userList = ud.findAll();
+                else
+                    userList = ud.findByname(name);
+                model.addAttribute("list", userList);
+                type = "user";
+                size = userList.size();
+            } else {
+                model.addAttribute("msg", "can't find data");
+                return "Public/Fail";
+            }
+            model.addAttribute("name",name);
+            model.addAttribute("type", type);
+            model.addAttribute("size",size);
+            return "AdminControll/ControllIndex";
+        }
+        return "AdminControll/ControllIndex";
     }
 
     @RequestMapping("/goadddoctor")

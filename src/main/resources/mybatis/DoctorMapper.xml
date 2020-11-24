@@ -9,11 +9,19 @@
       select * from doctor
     </select>
 
+    <select id="findByname" parameterType="String" resultType="csmen.group.project.entity.DoctorInfo">
+        select * from doctor WHERE name like concat('%',#{name},'%')
+    </select>
+
     <select id="findByHID" resultType="csmen.group.project.entity.DoctorInfo">
       select * from doctor WHERE HID = #{HID}
     </select>
 
-    <select id="login" parameterType="csmen.group.project.entity.DoctorInfo" resultType="csmen.group.project.entity.DoctorInfo">
+    <select id="findBynameAndHID" resultType="csmen.group.project.entity.DoctorInfo">
+        select * from doctor WHERE name like concat('%',#{name},'%') and HID = #{HID}
+    </select>
+
+    <select id="login" parameterType="csmen.group.project.entity.DoctorInfo"  resultType="csmen.group.project.entity.DoctorInfo">
         select id,name FROM doctor WHERE name = #{name} AND password = #{password}
     </select>
 
