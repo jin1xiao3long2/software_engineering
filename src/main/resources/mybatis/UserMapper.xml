@@ -18,11 +18,15 @@
       SELECT * FROM user where id = #{id}
     </select>
 
+    <select id="findByname" parameterType="String" resultType="csmen.group.project.entity.UserInfo">
+        SELECT * FROM user WHERE name LIKE concat('%',#{name},'%')
+    </select>
+
     <update id="updateUser" parameterType="csmen.group.project.entity.UserInfo">
       update user SET name=#{name},password=#{password},sex=#{sex},phone_number=#{phone_number},id_number=#{id_number} WHERE id = #{id}
     </update>
 
-    <select id="findByname" parameterType="csmen.group.project.entity.UserInfo"
+    <select id="findBynameAndIDnumber" parameterType="csmen.group.project.entity.UserInfo"
             resultType="csmen.group.project.entity.UserInfo">
         select id FROM user WHERE name = #{name} AND id_number = #{id_number}
     </select>

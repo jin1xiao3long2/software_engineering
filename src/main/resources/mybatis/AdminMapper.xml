@@ -5,6 +5,10 @@
       select * from admin
     </select>
 
+    <select id="findByname" parameterType="String" resultType="csmen.group.project.entity.AdminInfo">
+        SELECT * FROM admin WHERE name LIKE concat('%',#{name},'%')
+    </select>
+
     <select id="login" parameterType="csmen.group.project.entity.AdminInfo" resultType="csmen.group.project.entity.AdminInfo">
         select id,name,privilege,HID FROM admin WHERE name = #{name} AND password = #{password}
     </select>

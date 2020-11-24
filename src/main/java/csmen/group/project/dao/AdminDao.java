@@ -7,6 +7,8 @@ public interface AdminDao {
 
     List<AdminInfo> findAll();
 
+    List<AdminInfo> findByname(String name);
+
     AdminInfo login(AdminInfo admin);
 
     int addAdmin(AdminInfo admin);
@@ -16,4 +18,6 @@ public interface AdminDao {
     AdminInfo findByid(Integer id);
 
     int updateAdmin(AdminInfo admin);
+
+
 }

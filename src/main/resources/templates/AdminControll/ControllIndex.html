@@ -10,103 +10,60 @@
 </head>
 <body>
 欢迎你 ：<input th:value="${admin.name}" style="border: none; outline: none"/><br><br><br><br>
-<select th:if="${admin.privilege} == 'Hyper'" onchange="change_table(this.options[this.options.selectedIndex].value)">
-    <option value="1" selected>管理员</option>
-    <option value="2">医院</option>
-    <option value="3">社区</option>
-</select>
+
 <h2>人员信息维护</h2>
+<form action="/adminindexquery" method="post">
+    请输入用户名<input id = "name" name = "name" th:value="${name}"/></br>
+    <select id="type" name="type" style="width: 173px" th:if="${admin.privilege}=='Hyper'" >
+    <option value="admin" th:selected="${type}=='admin'">管理员</option>
+    <option value="doctor" th:selected="${type}=='doctor'">医生</option>
+    <option value="user" th:selected="${type}=='user'">用户</option>
+</select>
+    <input id = "type" name="type" th:if="${admin.privilege}!='Hyper'" style="display:none" value="doctor"></input>
+    <input type="submit" value="选择">
+</form>
 
-<button><a href="/goadddoctor">添加医生</a></button>
-<button><a href="/goadduser">添加用户</a></button>
-<button><a href="/goaddadmin">添加管理员</a></button>
-<!--第一个表格-->
-<table width="888" border="1" id = "tab1" th:style="${admin.privilege=='Hyper'}?'':'display:none'">
+<form action="adminindex" method="post">
+    <input type="submit" value="重置">
+</form>
+
+
+
+
+
+<table width="888" border="1" id="tab" th:if="${size}!=0">
     <thead>
     <tr>
-        <th>id</th>
-        <th>姓名</th>
-        <th>权限</th>
-        <th>HID</th>
-        <th>操作</th>
+        <td align="center">用户名</td>
+        <td align="center" th:if="${type}=='admin'">权限</td>
+        <td align="center" th:if="${type}!='admin'">电话号码</td>
+        <td align="center" th:if="${type}!='admin'">性别</td>
+        <td align="center">操作</td>
     </tr>
-    <tr th:each="admin:${alist}">
-        <td align="center" th:text="${admin.id}"></td>
-        <td align="center" th:text="${admin.name}"></td>
-        <td align="center" th:text="${admin.privilege}"></td>
-        <td align="center" th:text="${admin.HID}"></td>
-        <td align="center"><a th:href="@{'/goupdateadmin/'+${admin.id}}">修改</a>
-            <a th:href="@{'/godeladmin/'+${admin.id}}" onclick="javascript:return del();">删除</a>
-        </td>
-    </tr>
-    </thead>
-</table>
-
-
-<!--第二个表格-->
-<table width="888" border="1" id="tab2" th:style="${admin.privilege=='Hospital'}?'':'display:none'">
-    <thead>
-    <tr>
-        <th>HID</th>
-        <th>姓名</th>
-        <th>手机号</th>
-        <th>性别</th>
-        <th>操作</th>
-    </tr>
-    <tr th:each="doctor:${dlist}">
-        <td align="center" th:text="${doctor.HID}"></td>
-        <td align="center" th:text="${doctor.name}"></td>
-        <td align="center" th:text="${doctor.phone_number}"></td>
-        <td align="center" th:text="${doctor.sex}"></td>
-        <td align="center"><a th:href="@{'/goupdatedoctor/'+${doctor.DID}}">修改</a>
-            <a th:href="@{'/godeldoctor/'+${doctor.DID}}" onclick="javascript:return del();">删除</a>
-        </td>
-    </tr>
-    </thead>
-</table>
-
-
-
-<!--第三个表格-->
-<table width="888" border="1" id = "tab3" th:style="${admin.privilege=='Commulity'}?'':'display:none'">
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>姓名</th>
-        <th>手机号</th>
-        <th>性别</th>
-        <th>操作</th>
-    </tr>
-    <tr th:each="user:${ulist}">
-        <td align="center" th:text="${user.id}"></td>
+    <tr th:each="user:${list}">
         <td align="center" th:text="${user.name}"></td>
-        <td align="center" th:text="${user.phone_number}"></td>
-        <td align="center" th:text="${user.sex}"></td>
-        <td align="center"><a th:href="@{'/goupdateuser/'+${user.id}}" >修改</a>
-            <a th:href="@{'/godeluser/'+${user.id}}" onclick="javascript:return del();">删除</a>
+        <td align="center" th:if="${type}=='admin'" th:text="${user.privilege}"></td>
+        <td align="center" th:if="${type}!='admin'" th:text="${user.phone_number}"></td>
+        <td align="center" th:if="${type}!='admin'" th:text="${user.sex}"></td>
+        <td align="center"><a th:href="@{'/goupdate'+${type}+'/'+${user.id}}">修改</a>
+            <a th:href="@{'/godel'+${type}+'/'+${user.id}}" onclick="javascript:return del();">删除</a>
         </td>
     </tr>
     </thead>
 </table>
+<a th:if="${size}==0">未查询到结果</a>
+
 
 </body>
 
 <script>
-    function change_table(v){
-        for(var i=1;i<4;i++)
-        {
-            document.getElementById("tab"+i).style.display="none";
-        }
-        if(v!="" && !isNaN(v)){
-            document.getElementById("tab"+v).style.display="";
-        }
-    }
+
 
     function del() {
         var msg = "您真的确定要删除吗？\n\n请确认！";
-        if (confirm(msg)==true){
+        if (confirm(msg) == true) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

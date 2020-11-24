@@ -65,7 +65,7 @@ public class LoginController {
                 model.addAttribute("msg", "Login Error");
                 return "Public/Fail";
             }
-            id = du.getDID();
+            id = du.getId();
             session.setAttribute("aname", doctor.getName());
             session.setAttribute("apassword", doctor.getPassword());
             model.addAttribute("loginer", du);
@@ -111,7 +111,7 @@ public class LoginController {
 
     @RequestMapping("/changePassword")
     public String changePassword(UserInfo user, Model model) {
-        UserInfo uu = ud.findByname(user);
+        UserInfo uu = ud.findBynameAndIDnumber(user);
         if (uu == null) {
             return "Public/Fail";
         }

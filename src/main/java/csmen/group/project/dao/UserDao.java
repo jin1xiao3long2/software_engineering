@@ -15,9 +15,11 @@ public interface UserDao {
 
     UserInfo findByid(Integer id);
 
+    List<UserInfo> findByname(String name);
+
     int updateUser(UserInfo user);
 
-    UserInfo findByname(UserInfo user);
+    UserInfo findBynameAndIDnumber(UserInfo user);
 
     int changePasswd(UserInfo user);
 
