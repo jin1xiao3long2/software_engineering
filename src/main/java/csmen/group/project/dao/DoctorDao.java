@@ -18,6 +18,8 @@ public interface DoctorDao {
 
     List<DoctorInfo> findBynameAndHID(@Param("name")String name, @Param("HID")Integer HID);
 
+    List<DoctorInfo> queryBynameAndinfo(@Param("text") String text);
+
     DoctorInfo findByid(Integer id);
 
     int updateDoctor(DoctorInfo doctor);

@@ -21,6 +21,10 @@
         select * from doctor WHERE name like concat('%',#{name},'%') and HID = #{HID}
     </select>
 
+    <select id="queryBynameAndinfo" resultType="csmen.group.project.entity.DoctorInfo">
+        select * from doctor WHERE (case when name like concat('%',#{text},'%') then 1 else 0 end + case when expertise like concat('%',#{text},'%') then 1 else 0 end + case when description like concat('%',#{text},'%') then 1 else 0 end)>=1;
+    </select>
+
     <select id="login" parameterType="csmen.group.project.entity.DoctorInfo"  resultType="csmen.group.project.entity.DoctorInfo">
         select id,name FROM doctor WHERE name = #{name} AND password = #{password}
     </select>

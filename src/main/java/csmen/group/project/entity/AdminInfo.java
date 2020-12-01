@@ -58,6 +58,4 @@ public class AdminInfo {
     public void setHID(Integer HID) {
         this.HID = HID;
     }
-
-
 }
