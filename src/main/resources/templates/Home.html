@@ -9,14 +9,18 @@
 <!-- 顶部导航栏 -->
 <div th:replace="~{Bar :: topBar}"></div>
 <h2>主界面</h2>
-<button onclick="test()">Main</button>
+
+<form action="/queryfind" method="post">
+
+    请输入搜索内容:<input id="query" name="query" required="required" placeholder="请输入搜索内容"><br/><br/>
+    <input type="submit" value="查询">
+</form>
+
+
+
 <div th:replace="~{Bar :: footerBar}"></div>
 
 <script>
-    function test(){
-        alert("This is a test");
-        window.location.href = "/login"
-    }
 </script>
 </body>
 </html>
