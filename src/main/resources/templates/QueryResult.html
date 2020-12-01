@@ -8,25 +8,64 @@
 <body>
 <!-- 顶部导航栏 -->
 <div th:replace="~{Bar :: topBar}"></div>
-<table width="888" border="1" id="tab1">
-    <thead>
+
+<button onclick="change_table('tab1')">医生</button>
+<button onclick="change_table('tab2')">信息</button>
+<button onclick="change_table('tab3')">这啥</button>
+<table width="888" border="1" id="tab1" >
     <tr>
-        <td align="center">医生名</td>
-        <td align="center">医院(ID)</td>
-        <td align="center">描述</td>
+        <td align="center" width = "10%">医生名</td>
+        <td align="center" width = "10%">医院(ID)</td>
+        <td align="center" width = "80%">描述</td>
     </tr>
     <tr th:each="doctor:${doctorlist}">
-        <td align="center" th:text="${doctor.name}"></td>
-        <td align="center" th:text="${doctor.HID}"></td>
-        <td align="center" th:text="${doctor.description}"></td>
+        <td align="center" width = "10%" th:text="${doctor.name}"></td>
+        <td align="center" width = "10%" th:text="${doctor.HID}"></td>
+        <td align="center" width = "80%" th:text="${doctor.description}"></td>
     </tr>
-    </thead>
 </table>
+
+<table width="888" border="1" id="tab2" style="display:none">
+    <tr>
+        <td align="center" width = "30%">医生名</td>
+        <td align="center" width = "30%">性别</td>
+        <td align="center" width = "40%">类别</td>
+    </tr>
+    <tr th:each="doctor:${doctorlist}">
+        <td align="center" width = "30%" th:text="${doctor.name}"></td>
+        <td align="center" width = "30%" th:text="${doctor.sex}"></td>
+        <td align="center" width = "40%" th:text="${doctor.status}"></td>
+    </tr>
+</table>
+
+<table width="888" border="1" id="tab3" style="display:none">
+    <tr>
+        <td align="center" width = "10%">医生名</td>
+        <td align="center" width = "45%">电话</td>
+        <td align="center" width = "45%">身份证</td>
+    </tr>
+    <tr th:each="doctor:${doctorlist}">
+        <td align="center" width = "10%" th:text="${doctor.name}"></td>
+        <td align="center" width = "45%" th:text="${doctor.phone_number}"></td>
+        <td align="center" width = "45%" th:text="${doctor.id_number}"></td>
+    </tr>
+</table>
+
 
 
 <div th:replace="~{Bar :: footerBar}"></div>
 
 <script>
+
+    function change_table(e){
+        var tab = document.getElementById(e)
+        var arr = new Array(3)
+        for(var i = 0; i < 3; i++) {
+            arr[i] = document.getElementById(String("tab").concat((i + 1).toString()))
+            arr[i].style.display='none'
+        }
+        tab.style.display='table'
+    }
 </script>
 </body>
 </html>
