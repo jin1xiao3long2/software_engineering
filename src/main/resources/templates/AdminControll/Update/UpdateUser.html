@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <title>修改用户</title>
     <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+    <link rel="stylesheet" href="../../../static/css/animate.min.css">
 </head>
 <body>
-<h2>这是修改页面</h2>
+    <div class="animated bounceInDown">
+        <div id="main">
+            <h2>修改用户</h2>
 
-请输入姓名：<input id="name" th:value="${user.name}"/><br><br>
+            请输入账号：<input id="name" th:value="${user.name}"/><br><br>
 
-请选择性别：<select id="sex" style="width: 173px">
-    <option value="男" th:selected="${user.sex} eq '男'">男</option>
-    <option value="女" th:selected="${user.sex} eq '女'">女</option>
-</select>
-请输入password：<input id="password" th:value="${user.password}"/><br><br>
-请输入phone_number：<input id="phone_number" th:value="${user.phone_number}"/><br><br>
-请输入id_number：<input id="id_number" th:value="${user.id_number}"/><br><br>
-</select><br><br>
-<button onclick="goupdate()">修改</button>
- 
-<button name="button" onclick="window.location.href='/adminindex';">返回</button>
+            请选择性别：<select id="sex" style="width: 173px">
+                <option value="男" th:selected="${user.sex} eq '男'">男</option>
+                <option value="女" th:selected="${user.sex} eq '女'">女</option>
+            </select>
+            请输入password：<input id="password" th:value="${user.password}"/><br><br>
+            请输入phone_number：<input id="phone_number" th:value="${user.phone_number}"/><br><br>
+            请输入id_number：<input id="id_number" th:value="${user.id_number}"/><br><br>
+            </select><br><br>
+            <button onclick="goupdate()">修改</button>
+             
+            <button name="button" onclick="window.location.href='/adminindex';">返回</button>
+        </div>
+    </div>
 </body>
 <script>
     function goupdate() {
@@ -43,4 +48,34 @@
         })
     }
 </script>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        font-size: 14px;	
+        box-sizing: border-box;
+    }
+    body{
+        background-color: #56baed;
+    }
+    #main{
+        box-shadow: 0 30px 60px 0 rgba(0,0,0,.3);
+        width: 30%;
+        margin: auto;
+        background-color: #ffffff;
+        font-size: 20px;
+    }
+    h2{
+        font-size: 1.5em;
+    }
+    input,select{
+        float: right;
+        margin-right: 10%;
+    }
+    button{
+        margin-left: 20%;
+        margin-right: 10%;
+        margin-bottom: 20px;
+    }
+</style>
 </html>
