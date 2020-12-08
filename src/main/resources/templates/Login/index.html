@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../static/css/swiper.css">
+    <script src="../../static/js/jquery-1.8.0.min.js"></script>
+    <link rel="icon" href="../../static/img/hospital.png">
+    <title>首页</title>
+</head>
+<body>
+    <header>
+        <!-- 顶部导航栏 -->
+        <div th:replace="~{Bar :: topBar}"></div>
+    </header>
+    <!-- <div id="banner">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="img/banner1.jpg" width="100%;" height="630"></div>
+                <div class="swiper-slide"><img src="img/banner2.jpg" width="100%;" height="630"></div>
+                <div class="swiper-slide"><img src="img/banner3.jpg" width="100%;" height="630"></div>
+                <div class="swiper-slide"><img src="img/banner4.jpg" width="100%;" height="630"></div>
+    
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <div class="banner-nav-bg"></div>
+    </div> -->
+    <!-- 遮罩层 -->
+    <div id="cover" style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 "></div>
+    <div id="change">
+        <div class="header">
+            <span class="key"><img src="../../static/img/key.png" alt="" class="key"></span><h2>修改密码</h2>
+        </div>
+        <input  type="hidden" id="id" th:value="${user.id}">
+        <div class="pwd first">
+            请输入密码：
+                <input type="password" id="passwordOne" placeholder="请输入密码"/>
+        </div>
+        <div class="pwd second">
+            请确认密码：
+                <input type="password" id="passwordTwo" placeholder="请确认密码"/>
+        </div>
+        <div class="footer">      
+            <button onclick="changePasswd()" class="btn2">修改</button>
+            <button  name="button"  onclick="javascript:history.back(-1);" class="btn2">取消</button>
+        </div>
+    </div>
+    <div id="setting">
+        <h2>这是修改页面</h2>
+        <input  type="hidden" id="id" th:value="${user.id}"><br><br>
+        请输入姓名：<input  id="name" th:value="${user.name}"/><br><br>
+        请输入密码: <input type="password" id="password3" th:value="${user.password}"/><br><br>
+        请输入手机号：<input id="phone_number" th:value="${user.phone_number}"/><br><br>
+        请输入身份证号：<input id="id_number" th:value="${user.id_number}"/>
+        请选择性别：<select id="sex" style="width: 173px">
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select><br><br>
+        <button onclick="goupdate()">修改</button> 
+        <button  name="button"  onclick="javascript:history.back(-1);" id = "cancel">返回</button>
+    </div>
+    <div class="search">
+        <form action="http://baidu.com/s"method="get">
+			<input type="search" name="search1" placeholder="请输入搜索关键字...">
+			<button type="submit">search</button>
+		</form>
+    </div>
+    
+    <div class="user">
+        <div class="icon">
+            <img src="../../static/img/user.jpg" alt="个人中心">
+            <div class="person"><b>个人中心</b></div>
+        </div>
+        <div class="more">
+            <ul id="modify">
+                <li>修改密码</li>
+                <li>修改个人信息</li>
+                <li>退出登录</li>
+            </ul>
+        </div>
+    </div>
+    <div class="server">
+        <div class="appointment">
+            <a href="#">
+                <span class="p1"></span>
+                <h2>预约挂号</h2>
+            </a>
+        </div>
+        <div class="online">
+            <a href="#">
+            <span class="p2"></span>
+            <h2>在线问诊</h2></a>
+        </div>
+        <div class="find">
+            <a href="#">
+                <span class="p3"></span>
+                <h2>寻找医生</h2>
+            </a>
+        </div>
+        <div class="forum">
+            <a href="../AdminControll/AdminLogin.html">
+                <span class="p4"></span>
+                <h2>管理员登录</h2>
+            </a>
+        </div>   
+    </div>
+    <footer">
+        <!-- 底部导航栏 -->
+        <div th:replace="~{Bar :: footerBar}"></div>
+    </footer>
+</body>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        font-size: 14px;	
+        box-sizing: border-box;
+    }
+    .header{
+        background-color: #f7f7f7;
+        border-top: solid #aaaaaa 1px;
+        border-bottom: solid #aaaaaa 1px;
+    }
+    .footer{
+        background-color: #f7f7f7;
+        border-top: solid #aaaaaa 1px;
+        border-bottom: solid #aaaaaa 1px;
+        margin-top: 20px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .pwd{
+        font-size: 20px;
+        border: #eeeeee;
+        padding-left: 50px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .first{
+        
+        border-bottom-style: dotted;
+    }
+    .red{
+        color: #dd5a43;
+    }
+    .key{
+        width: 2.5em;
+        height: 2.5em;
+        float: left;
+    }
+    h4{
+        float: left;
+    }
+    .btn2{
+        margin-left: 80px;
+        font-size: 20px;
+    }
+    body{
+        background-color: #fff;
+    }
+    #change{
+        width: 50%;
+        height: 300px;
+        background-color: white;
+        position: absolute;
+        left: 25%;
+        top: 0;
+        display: none;
+        z-index: 3;
+    }
+    .right{
+        float: right;
+    }
+    .left{
+        float: left;
+    }
+    #banner{
+        height:630px;
+    }
+    ol,ul{
+        list-style-type: none;
+    }
+    a{
+        color: #666;
+        text-decoration: none;
+    }
+    header{
+        height: 60px;
+        background-color: #1275e7;
+    }
+    header ul li{
+        float: left;
+        line-height: 50px;
+        padding: 0px 120px;
+    }
+    header ul li a{
+        margin: auto;
+        color: rgb(252, 177, 15);
+    }
+    .search{
+        width: 60%;
+        float: left;
+        margin: 40px 0 50px 150px;
+    }
+    .search form input{
+        height: 40px;
+        width: 220px;
+        border-radius: 5px 0 0 5px;
+        float: left;
+        outline: none;
+    }
+    .search button{
+        height: 40px;
+        width: 80px;
+        background-color: #fff;
+        border-radius: 0 5px 5px 0;
+    }
+    .user{
+        float: right;
+        margin-right: 50px;
+        height: 125px;
+        cursor: pointer;
+    }
+    .more{
+        float: right;
+        margin-top: 25px;
+    }
+    .more ul li{
+        color: #1275e7;
+        margin-top: 10px;
+    } 
+    .icon{
+        float: left;
+    }
+    .person{
+        text-align: center;
+        width: 90px;
+    }
+    .header h2{
+        font-size: 1.5em;
+    }
+    .server h2{
+        text-align: center;
+    }
+    .server{
+        margin-top: 100px;
+        height: 800px;
+    }
+    .appointment{
+        float: left;
+        margin-top: 100px;
+    }
+    .online{
+        float: left;
+        margin-top: 100px;
+    }
+    .find{
+        float: left;
+        margin-top: 100px;
+    }
+    .forum{
+        float: left;
+        margin-top: 100px;
+    }
+    .appointment .p1{
+        display: block;
+        margin: 0 300px;
+        width: 120px;
+        height: 120px;
+        background: url("../../static/img/appointment.jpg");
+    }
+    .online .p2{
+        display: block;
+        margin: 0 300px;
+        width: 120px;
+        height: 120px;
+        background: url("../../static/img/online.jpg");
+    }
+    .find .p3{
+        display: block;
+        margin: 0 300px;
+        width: 130px;
+        height: 130px;
+        background: url("../../static/img/find.jpg");
+    }
+    .forum .p4{
+        display: block;
+        margin: 0 300px;
+        width: 120px;
+        height: 120px;
+        background: url("../../static/img/adminLogin.jpg");
+    }
+    #setting{
+        width: 50%;
+        height: 300px;
+        background-color: white;
+        position: absolute;
+        left: 25%;
+        top: 0;
+        display: none;
+        z-index: 3;
+    }
+</style>
+<script>
+    var state = false;
+    var list = document.getElementById("modify");
+    var cag = document.getElementById("change");
+    var x = document.getElementsByClassName("footer")[0];
+    // 隐藏修改密码界面
+    x.lastElementChild.addEventListener("click",function(){
+        $("#change")[0].style.display = "none";
+        $('#cover').css('display','none'); //关闭遮罩层
+    })
+    // 隐藏修改个人信息界面
+    document.getElementById("cancel").addEventListener("click",function(){
+        $("#setting")[0].style.display = "none";
+        $('#cover').css('display','none'); //关闭遮罩层
+    })
+    // 显示修改密码界面
+    document.getElementById("modify").firstElementChild.addEventListener("click",function(){
+        $("#change")[0].style.display = "block";
+        $('#cover').css('display','block'); //显示遮罩层
+        $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
+        alert("修改密码");
+    })
+    // 显示修改个人信息界面
+    document.getElementById("modify").children[1].addEventListener("click",function(){
+        $("#setting")[0].style.display = "block";
+        $('#cover').css('display','block'); //显示遮罩层
+        $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
+        alert("修改个人信息");
+    })
+    function changePasswd() {
+        var id = $("#id").val();
+        var password1 = $("#passwordOne").val();
+        var password2 = $("#passwordTwo").val();
+        if (Number(password1) == Number(password2)) {
+            $.post("/changePasswd", {id: id,password: password1}, function (res) {
+                if (res == true) {
+                    alert("修改成功");
+                    window.location.href = "/login";
+                } else {
+                    alert("修改失败，请检查数据重试");
+                }
+            })
+        } else {
+            alert("两次密码不一致！");
+        }
+    }
+    function goupdate() {
+        var id=$("#id").val();
+        var name = $("#name").val();
+        var password = $("#password3").val();
+        var sex = $("#sex").val();
+        var phone_number = $("#phone_number").val();
+        var id_number = $("#id_number").val();
+        $.post("/update",{id:id, name:name,password:password,sex:sex,
+            phone_number:phone_number,id_number:id_number},function (res) {
+            if (res==true) {
+                alert("修改成功");
+                window.location.href="redirect:/settings";
+            }else {
+                alert("修改失败，请检查数据重试！");
+            }
+        })
+    }
+</script>
+</html>
