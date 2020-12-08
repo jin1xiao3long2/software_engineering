@@ -27,4 +27,10 @@ public interface DoctorDao {
     int delDoctor(Integer id);
 
     int addDoctor(DoctorInfo doctor);
+    
+    List<DoctorInfo> findByExpertise(String expertise);
+    
+    String findStartTime(Integer DID);
+    
+    String findEndTime(Integer DID);
 }

@@ -153,4 +153,10 @@ public class LoginController {
             return false;
     }
 //    @RequestMapping("gologin") 进行用户检测判断
+    
+    @RequestMapping("/goAppointment")
+    public String GoAppointment()
+    {
+    	return "/Appointment";
+    }
 }

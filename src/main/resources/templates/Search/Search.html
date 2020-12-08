@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>查询</title>
+	<script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+</head>
+<body>
+	<h1>查询结果</h1>
+	
+	<table border="1" id = "tab1">
+	<tr th:each="doctor:${doctorlist}">
+        <td align="center" th:text="${doctor.name}"></td>
+        <td align="center" th:text="${doctor.faculty}"></td>
+        <td align="center" th:text="${doctor.expertise}"></td>
+    </tr>
+    </table>
+    
+   	<input onclick="history.go(-1)" type="button" value="返回">
+</body>
+</html>

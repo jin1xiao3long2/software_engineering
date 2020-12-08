@@ -36,7 +36,22 @@
             <input type="submit" value="注销"/>
         </form>
     </div>
+    
+     <form  action="/goAppointment" method="post" th:if="${session.aname} != null">
+	<input type="submit" value="挂号" id="app">
+	</form>
+	
+<!--  	<script>
+		function set_display(e)
+		{
+			var a = document.getElementById(e)
+			a.style.display='none'
+		}
+	</script>
+	onclick="set_display('app')"-->
 </div>
+    
+
 
 <!-- 底部信息栏 -->
 <div class="footerbar" th:fragment="footerBar">

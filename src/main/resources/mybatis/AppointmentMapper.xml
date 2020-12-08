@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="csmen.group.project.dao.AppointmentDao">
+	<select id="findByDID" parameterType="java.lang.Integer" resultType="csmen.group.project.entity.AppointmentInfo">
+		select * from Appointment where DID=#{DID}
+	</select> 
+	
+	<update id="updateAppointment" parameterType="csmen.group.project.entity.AppointmentInfo">
+		update appointment set currentpatients=#{currentpatients} where DID=#{DID}
+	</update>
+</mapper>

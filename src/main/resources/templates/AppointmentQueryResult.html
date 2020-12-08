@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+</head>
+<body>
+	
+<table width="888" border="1" th:if="${appointmentinfosize}!=0">
+	<tr>
+        <td align="center" width = "10%">医生名</td>
+        <td align="center" width = "45%">起始时间</td>
+        <td align="center" width = "40%">结束时间</td>
+    </tr>
+    <tr th:each="app:${appointmentinfo}">
+        <td align="center" width = "10%" th:text="${app.name}"></td>
+        <td align="center" width = "45%" th:text="${app.timestart}"></td>
+        <td align="center" width = "40%" th:text="${app.timestop}"></td>
+        <td align="center"><a th:href="@{'/selectDoctor/'+${app.DID}}">选择</a></td>
+    </tr>
+</table>
+	<button onclick="history.go(-1)">返回</button>
+</body>
+
+</html>
