@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+</head>
+
+<body>
+	<table width="888" border="0" th:if="${foruminfosize}!=0">
+	<tr>
+		<td align="center" width = "70%">主题</td>
+        <td align="center" width = "20%">作者</td>
+        <td align="center" width = "10%"></td>
+	</tr>
+    <tr th:each="topic:${foruminfo}">
+        <td align="center" width = "70%"><a th:href="@{'/selectTopic/'+${topic.id}}" th:text="${topic.topic}"></a></td>
+        <td align="center" width = "20%" th:text="${topic.author}"></td>
+    </tr>
+</table>
+
+<a th:if="${foruminfosize==0}">没有帖子，来发布第一条帖子吧</a>
+
+	<button onclick="history.go(-1)">返回</button>
+</body>
+</html>

@@ -16,6 +16,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.io.*;
+
 @Controller
 public class LoginController {
 
@@ -40,8 +42,30 @@ public class LoginController {
     public String gologin(@RequestParam("name") String name,
                           @RequestParam("password") String password,
                           @RequestParam("type") String type,
-                          HttpServletRequest request, Model model) {
-        Integer id;
+                          HttpServletRequest request, Model model){//此处有改动!!!
+        
+    	try 
+    	{
+	    	String path="G:/SEName/";
+	    	String filename="name.txt";
+	    	File f = new File(path, filename);
+	    	if(f.exists())
+	    	{
+	    		f.delete();    	
+	    	}
+	    	f.createNewFile();
+	    	FileWriter fw = new FileWriter(f.getAbsoluteFile());
+	    	BufferedWriter bw = new BufferedWriter(fw);
+	    	bw.write(name);
+	    	bw.close();
+	    	System.out.println(name);
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    	
+    	Integer id;
         HttpSession session = request.getSession();
         if (type.equals("user")) {
             UserInfo user = new UserInfo();
@@ -153,4 +177,10 @@ public class LoginController {
             return false;
     }
 //    @RequestMapping("gologin") 进行用户检测判断
+    
+    @RequestMapping("/goAppointment")
+    public String GoAppointment()
+    {
+    	return "/Appointment";
+    }
 }

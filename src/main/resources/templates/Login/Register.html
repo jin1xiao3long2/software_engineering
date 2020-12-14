@@ -4,95 +4,21 @@
     <meta charset="UTF-8">
     <title>账号注册</title>
     <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
-    <style th:src="@{/css/animated.min.css}"></style>
-    <link rel="stylesheet" href="../../static/css/animate.min.css">
 </head>
 <body>
-    <div class="animated bounceInDown">
-        <div class="main">
-            <div class="content">
+<h2>账号注册</h2>
+请输入姓名：<input type="text" id="name"/><br><br>
+请输入密码：<input type="password" id="password" placeholder="仅支持整数"/><br><br>
+请确认密码：<input type="password" id="passwordTwo" placeholder="仅支持整数"/><br><br>
+请选择性别：<select id="sex" name="sex" style="width: 173px">
+    <option value="male">男</option>
+    <option value="female">女</option>
+</select><br><br>
+请输入手机号: <input type="text" id="phone_number" placeholder="请输入13位手机号"  required="required">
+请输入身份证号: <input type = "text" id="id_number" placeholder="请输入15位或18位身份证号"  required = "required">
 
-            </div>
-            <div class="sidebar">
-                <h2>账号注册</h2>
-                <div class="tit">
-                    <i>*</i>请输入姓名：
-                </div>
-                <input type="text" id="name"/><br><br>
-                <div class="tit">
-                    <i>*</i>请输入密码：
-                </div>
-                <input type="password" id="password" placeholder="仅支持整数"/><br><br>
-                <div class="tit">
-                    <i>*</i>请确认密码：
-                </div>
-                <input type="password" id="passwordTwo" placeholder="仅支持整数"/><br><br>
-                <div class="tit">
-                    <i>*</i>请选择性别：
-                    <select id="sex" name="sex" style="width: 173px">
-                        <option value="male">男</option>
-                        <option value="female">女</option>
-                    </select><br><br>
-                </div>
-                <div class="title">
-                    <i>*</i>请输入手机号: 
-                </div>
-                <input type="text" id="phone_number" placeholder="请输入13位手机号"  required="required"><br><br>
-                <div class="tit"> 
-                    请输入身份证号: 
-                </div>
-                <input type = "text" id="id_number" placeholder="请输入15位或18位身份证号"  required = "required"><br><br>
-                <button onclick="register()">注册</button>
-            </div>            
-        </div>
-    </div>
+<button onclick="register()">注册</button>
 </body>
-<style>
-    body, button, input, select, textarea {
-        font: 20px/1.125 Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
-    }
-    a{
-        text-decoration: none;
-    }
-    button{
-        cursor: pointer;
-    }
-    body{
-        margin: 0;
-    }
-    .main{
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        margin: auto;
-        background-color:  #bee1f5;
-    }
-    .content{
-        position: absolute;
-        background: url(../../static/img/bgp.jpg) no-repeat;
-        width: 70%;
-        height: 100%;
-        float: left;
-    }
-    .sidebar{
-        width: 28%;
-        height: 100%;
-        float: right;
-    }
-    h2{
-        margin: auto;
-        position: relative;
-    }
-    .main i{
-        color: red;
-        font-size: 25px;
-        font-family: "SimSun";
-        padding-right: 5px;
-    }
-    .main .tit{
-        width: 200px;
-    }
-</style>
 <script>
     function register() {
         var name = $("#name").val();

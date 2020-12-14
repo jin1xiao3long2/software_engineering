@@ -1,6 +1,7 @@
 package csmen.group.project.entity;
 
 public class DoctorInfo {
+	private Integer DID;
     private Integer id;
     private Integer HID;
     private String name;
@@ -15,7 +16,17 @@ public class DoctorInfo {
     private String description;
     private String status;
 
-    public Integer getId() {
+    
+    
+    public Integer getDID() {
+		return DID;
+	}
+
+	public void setDID(Integer dID) {
+		DID = dID;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -119,8 +130,9 @@ public class DoctorInfo {
         this.status = status;
     }
 
-    public DoctorInfo(Integer id, Integer HID, String name, String password, String sex, String phone_number, String id_number, String faculty, String profession, String political, String expertise, String description, String status) {
-        this.id = id;
+    public DoctorInfo(Integer DID,Integer id, Integer HID, String name, String password, String sex, String phone_number, String id_number, String faculty, String profession, String political, String expertise, String description, String status) {
+        this.DID = DID;
+    	this.id = id;
         this.HID = HID;
         this.name = name;
         this.password = password;

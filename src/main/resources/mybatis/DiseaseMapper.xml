@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="csmen.group.project.dao.DiseaseDao">
+<!--    <insert id="addUser"  parameterType="csmen.group.project.entity.UserInfo">-->
+<!--       INSERT INTO user(name,password,sex,phone_number,id_number) VALUES (#{name},#{password},#{sex},#{phone_number},#{id_number})-->
+<!--    </insert>-->
+
+   	<select id="querybynameandinfo" resultType="csmen.group.project.entity.DiseaseInfo">
+        select * from disease WHERE (case when name like concat('%',#{text},'%') then 1 else 0 end + case when symptom like concat('%',#{text},'%') then 1 else 0 end + case when alias like concat('%',#{text},'%') then 1 else 0 end)>=1;
+    </select>
+
+<!--    <select id="findByname" parameterType="csmen.group.project.entity.UserInfo" resultType="csmen.group.project.entity.UserInfo">-->
+<!--        select id FROM user WHERE name = #{name} AND id_number = #{id_number}-->
+<!--    </select>-->
+
+<!--    <update id="changePasswd" parameterType="csmen.group.project.entity.UserInfo">-->
+<!--      update user SET password=#{password}WHERE id = #{id}-->
+<!--    </update>-->
+</mapper>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+
+<form action="/doAppointment" method="post">
+	<div>
+		<select id="hospital" name="hospital">
+			<option value="123">hos_name=123</option>
+			<option value="local">当地医院</option>
+			<option value="甲等">甲等医院</option>
+		</select>
+		
+		<select id="expertise" name="expertise" method="post">
+			<option value="外科">外科</option>
+			<option value="呼吸内科">呼吸内科</option>
+		</select>
+	</div>
+	<input type="submit" value="查询">
+</form>
+<button onclick="history.go(-1)">返回</button>
+</body>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览帖子</title>
+    <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+</head>
+<body>
+	<h2 th:text="${topic.author}"></h2>
+	<h2 th:text="${topic.content}"></h2>
+	<br> 
+	<br>
+	<table width="888" border="0" th:if="${foruminfosize}!=0">
+	<tr>
+		<td align="center" width = "100%">回复</td>
+	</tr>
+    <tr th:each="reply:${replyinfo}">
+        <td align="center" width = "60%" th:text="${reply.content}"></td>
+        <td align="center" width = "10%" th:text="${reply.sender}"></td>
+        <td align="center" width = "30%" th:text="${reply.sendtime}"></td>
+    </tr>
+	</table>
+	
+	<form action="/Forum/gotoReply" method="post" th:object="${ReplyInfo}">
+		<input id="content" name="content" required="required" placeholder="输入回复内容">
+		<input type="submit" value="回复">
+	</form>
+</body>
+</html>

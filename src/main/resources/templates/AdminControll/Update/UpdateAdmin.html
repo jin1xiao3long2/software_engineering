@@ -4,31 +4,27 @@
     <meta charset="UTF-8">
     <title>修改用户</title>
     <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
-    <link rel="stylesheet" href="../../../static/css/animate.min.css">
 </head>
 <body>
-    <div class="animated bounceInDown">
-        <div id="main">
-            <h2>修改管理员</h2>
+<h2>这是修改页面</h2>
 
-            请输入账号：<input id="name" th:value="${admin.name}"/><br><br>
+请输入姓名：<input id="name" th:value="${admin.name}"/><br><br>
 
-            请输入password：<input id="password" th:value="${admin.password}"/><br><br>
-            请选择权限：<select id="privilege" style="width: 173px">
-                <option value="Hyper" th:selected="${admin.privilege} eq 'Hyper'">Hyper</option>
-                <option value="Hospital" th:selected="${admin.privilege} eq 'Hospital'">Hospital</option>
-                <option value="Commulity" th:selected="${admin.privilege} eq 'Commulity'">Commulity</option>
-            </select><br><br>
-            请选择医院(HID)：<select id="HID" style="width: 173px">
-                <option value="0">0</option>
-                <option value="1" selected>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select><br><br>
-            <button onclick="goupdate()">修改</button>           
-            <button name="button" onclick="window.location.href='/adminindex';">返回</button>
-        </div>
-    </div>  
+请输入password：<input id="password" th:value="${admin.password}"/><br><br>
+请选择权限：<select id="privilege" style="width: 173px">
+    <option value="Hyper" th:selected="${admin.privilege} eq 'Hyper'">Hyper</option>
+    <option value="Hospital" th:selected="${admin.privilege} eq 'Hospital'">Hospital</option>
+    <option value="Commulity" th:selected="${admin.privilege} eq 'Commulity'">Commulity</option>
+</select><br><br>
+请选择医院(HID)：<select id="HID" style="width: 173px">
+    <option value="0">0</option>
+    <option value="1" selected>1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+</select><br><br>
+<button onclick="goupdate()">修改</button>
+ 
+<button name="button" onclick="window.location.href='/adminindex';">返回</button>
 </body>
 <script>
     function goupdate() {
@@ -48,34 +44,4 @@
         })
     }
 </script>
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-        font-size: 14px;	
-        box-sizing: border-box;
-    }
-    body{
-        background-color: #56baed;
-    }
-    #main{
-        box-shadow: 0 30px 60px 0 rgba(0,0,0,.3);
-        width: 30%;
-        margin: auto;
-        background-color: #ffffff;
-        font-size: 20px;
-    }
-    h2{
-        font-size: 1.5em;
-    }
-    input,select{
-        float: right;
-        margin-right: 15%;
-    }
-    button{
-        margin-left: 20%;
-        margin-right: 10%;
-        margin-bottom: 20px;
-    }
-</style>
 </html>

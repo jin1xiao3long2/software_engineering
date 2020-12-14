@@ -33,6 +33,10 @@
       SELECT * FROM doctor where id = #{id}
     </select>
 
+	<select id="findByExpertise" parameterType="String" resultType="csmen.group.project.entity.DoctorInfo">
+		select * from doctor where expertise=#{expertise}
+	</select>
+
     <update id="updateDoctor" parameterType="csmen.group.project.entity.DoctorInfo">
       update doctor SET name=#{name}, faculty=#{faculty}, profession=#{profession},political=#{political}, expertise=#{expertise}, description=#{description}, status=#{status},password=#{password}, phone_number=#{phone_number},id_number=#{id_number},sex=#{sex} WHERE id=#{id}
     </update>
@@ -45,6 +49,13 @@
        INSERT INTO doctor(name,faculty,profession,political,expertise,description,HID,status,password,phone_number,id_number,sex) VALUES (#{name},#{faculty},#{profession},#{political},#{expertise},#{description},#{HID},#{status},#{password},#{phone_number},#{id_number},#{sex})
     </insert>
 
+	<select id="findStartTime" parameterType="java.lang.Integer" resultType="String">
+		select timestart from Appointment where DID=#{DID}
+	</select>
+	
+	<select id="findEndTime" parameterType="java.lang.Integer" resultType="String">
+		select timestop from Appointment where DID=#{DID}
+	</select>
 <!--    <select id="findByname" parameterType="csmen.group.project.entity.UserInfo" resultType="csmen.group.project.entity.UserInfo">-->
 <!--        select id FROM user WHERE name = #{name} AND id_number = #{id_number}-->
 <!--    </select>-->

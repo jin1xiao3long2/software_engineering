@@ -18,6 +18,4 @@ public interface AdminDao {
     AdminInfo findByid(Integer id);
 
     int updateAdmin(AdminInfo admin);
-
-
 }

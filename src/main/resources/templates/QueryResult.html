@@ -2,79 +2,83 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>查询结果</title>
+    <title>首页</title>
     <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
 </head>
 <body>
 <!-- 顶部导航栏 -->
-    <div th:replace="~{Bar :: topBar}"></div>
-    <div class="main">
-        <button onclick="change_table('tab1')">医生</button>
-        <button onclick="change_table('tab2')">信息</button>
-        <button onclick="change_table('tab3')">管理信息</button>
-        <table width="888" border="1" id="tab1" >
-            <tr>
-                <td align="center" width = "10%">医生名</td>
-                <td align="center" width = "10%">医院(ID)</td>
-                <td align="center" width = "80%">描述</td>
-            </tr>
-            <tr th:each="doctor:${doctorlist}">
-                <td align="center" width = "10%" th:text="${doctor.name}"></td>
-                <td align="center" width = "10%" th:text="${doctor.HID}"></td>
-                <td align="center" width = "80%" th:text="${doctor.description}"></td>
-            </tr>
-        </table>
+<div th:replace="~{Bar :: topBar}"></div>
 
-        <table width="888" border="1" id="tab2" style="display:none">
-            <tr>
-                <td align="center" width = "30%">医生名</td>
-                <td align="center" width = "30%">性别</td>
-                <td align="center" width = "40%">类别</td>
-            </tr>
-            <tr th:each="doctor:${doctorlist}">
-                <td align="center" width = "30%" th:text="${doctor.name}"></td>
-                <td align="center" width = "30%" th:text="${doctor.sex}"></td>
-                <td align="center" width = "40%" th:text="${doctor.status}"></td>
-            </tr>
-        </table>
+<button onclick="change_table('tab1')">医生</button>
+<button onclick="change_table('tab2')">医院</button>
+<button onclick="change_table('tab3')">疾病</button>
+<br>
+<div  id="tab1">
+<table width="888" border="1" th:if="${doctorsize}!=0">
+    <tr th:if="${doctorsize}!=0">
+        <td align="center" width = "10%">医生名</td>
+        <td align="center" width = "10%">医院(ID)</td>
+        <td align="center" width = "80%">描述</td>
+    </tr>
+    <tr th:each="doctor:${doctorlist}" th:if="${doctorsize}!=0">
+        <td align="center" width = "10%" th:text="${doctor.name}"></td>
+        <td align="center" width = "10%" th:text="${doctor.HID}"></td>
+        <td align="center" width = "80%" th:text="${doctor.description}"></td>
+    </tr>
+</table>
+<a th:if="${doctorsize}==0">无结果</a>
+</div>
 
-        <table width="888" border="1" id="tab3" style="display:none">
-            <tr>
-                <td align="center" width = "10%">医生名</td>
-                <td align="center" width = "45%">电话</td>
-                <td align="center" width = "45%">身份证</td>
-            </tr>
-            <tr th:each="doctor:${doctorlist}">
-                <td align="center" width = "10%" th:text="${doctor.name}"></td>
-                <td align="center" width = "45%" th:text="${doctor.phone_number}"></td>
-                <td align="center" width = "45%" th:text="${doctor.id_number}"></td>
-            </tr>
-        </table>
+<div id="tab2" style="display:none" >
+<table width="888" border="1" th:if="${hospitalsize}!=0">
+    <tr>
+        <td align="center" width = "30%">医院名</td>
+        <td align="center" width = "30%">简介</td>
+        <td align="center" width = "40%">地址</td>
+    </tr>
+    <tr th:each="hospital:${hospitallist}">
+        <td align="center" width = "30%" th:text="${hospital.hos_name}"></td>
+        <td align="center" width = "30%" th:text="${hospital.introduction}"></td>
+        <td align="center" width = "40%" th:text="${hospital.address}"></td>
+    </tr>
+</table>
+<a th:if="${doctorsize}==0">无结果</a>
+</div>
 
-    </div>
+<div id="tab3"  style="display:none">
+<table width="888" border="1"  th:if="${diseasesize}!=0">
+    <tr>
+        <td align="center" width = "10%">名称</td>
+        <td align="center" width = "45%">症状</td>
+        <td align="center" width = "45%">别名</td>
+    </tr>
+    <tr th:each="disease:${diseaselist}">
+        <td align="center" width = "10%" th:text="${disease.name}"></td>
+        <td align="center" width = "45%" th:text="${disease.symptom}"></td>
+        <td align="center" width = "45%" th:text="${disease.alias}"></td>
+    </tr>
+</table>
+<a th:if="${doctorsize}==0">无结果</a>
+</div>
 
+<input onclick="history.go(-1)" type="button" value="返回">
 
+<br>
 
-
-    <div th:replace="~{Bar :: footerBar}"></div>
+<div th:replace="~{Bar :: footerBar}"></div>
 
 <script>
 
     function change_table(e){
         var tab = document.getElementById(e)
         var arr = new Array(3)
+        
         for(var i = 0; i < 3; i++) {
             arr[i] = document.getElementById(String("tab").concat((i + 1).toString()))
             arr[i].style.display='none'
         }
-        tab.style.display='table'
+        tab.style.display='inline'
     }
 </script>
-<style>
-    .main{
-        width: 60%;
-        margin: auto;
-    }
-</style>
 </body>
 </html>

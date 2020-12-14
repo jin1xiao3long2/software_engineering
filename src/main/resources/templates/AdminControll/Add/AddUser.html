@@ -4,26 +4,21 @@
     <meta charset="UTF-8">
     <title>添加用户</title>
     <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
-    <link rel="stylesheet" href="../../../static/css/animate.min.css">
 </head>
 <body>
-    <div class="animated bounceInDown">
-        <div id="main">
-            <h2>添加用户</h2>
+<h2>我是添加页面</h2>
 
-            请输入账号：<input  id="name" type="text"/><br><br>
-            请选择性别：<select id="sex" style="width: 173px">
-                <option value="男">男</option>
-                <option value="女">女</option>
-            </select><br><br>
-            请输入password：<input id="password1" type="text"/><br><br>
-            请再次输入password <input id="password2" type="text"/><br><br>
-            请输入phone_number：<input id="phone_number" type="text"/><br><br>
-            请输入id_number：<input id="id_number" type="text"/><br><br>
-            <button  onclick="goadd()" name="sub" id="sub">添加</button>
-            <button  name="button"  onclick="window.location.href='/adminindex';">返回</button>
-        </div>
-    </div>
+请输入姓名：<input  id="name" type="text"/><br><br>
+请选择性别：<select id="sex" style="width: 173px">
+    <option value="男">男</option>
+    <option value="女">女</option>
+</select><br><br>
+请输入password：<input id="password1" type="text"/><br><br>
+请再次输入password <input id="password2" type="text"/><br><br>
+请输入phone_number：<input id="phone_number" type="text"/><br><br>
+请输入id_number：<input id="id_number" type="text"/><br><br>
+<button  onclick="goadd()" name="sub" id="sub">添加</button>
+<button  name="button"  onclick="window.location.href='/adminindex';">返回</button>
 </body>
 <script>
     function goadd() {
@@ -51,34 +46,4 @@
         }
     }
 </script>
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-        font-size: 14px;	
-        box-sizing: border-box;
-    }
-    body{
-        background-color: #56baed;
-    }
-    #main{
-        box-shadow: 0 30px 60px 0 rgba(0,0,0,.3);
-        width: 30%;
-        height: 400px;
-        margin: auto;
-        background-color: #ffffff;
-        font-size: 20px;
-    }
-    h2{
-        font-size: 1.5em;
-    }
-    input,select{
-        float: right;
-        margin-right: 10%;
-    }
-    button{
-        margin-left: 20%;
-        margin-right: 10%;
-    }
-</style>
 </html>

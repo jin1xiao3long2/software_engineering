@@ -2,38 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>修改医生信息</title>
+    <title>修改用户</title>
     <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
-    <link rel="stylesheet" href="../../../static/css/animate.min.css">
 </head>
 <body>
-    <div class="animated bounceInDown">
-        <div id="main">
-            <h2>修改医生信息</h2>
-            <input  type="hidden" id="DID" th:value="${doctor.DID}"><br><br>
-            请输入账号：<input  id="name" th:value="${doctor.name}"/><br><br>
-            请输入faculty：<input id="faculty" th:value="${doctor.faculty}"/><br><br>
-            请选择性别：<select id="sex" style="width: 173px">
-                <option value="男" th:selected="${doctor.sex} eq '男'">男</option>
-                <option value="女" th:selected="${doctor.sex} eq '女'">女</option>
-            </select>
-            请输入profession：<input id="profession" th:value="${doctor.profession}"/><br><br>
-            请输入political：<input id="political" th:value="${doctor.political}"/><br><br>
-            请输入expertise：<input id="expertise" th:value="${doctor.expertise}"/><br><br>
-            请输入description：<input id="description" th:value="${doctor.description}"/><br><br>
-            请输入status：<input id="status" th:value="${doctor.status}"/><br><br>
-            请输入password：<input id="password" th:value="${doctor.password}"/><br><br>
-            请输入phone_number：<input id="phone_number" th:value="${doctor.phone_number}"/><br><br>
-            请输入id_number：<input id="id_number" th:value="${doctor.id_number}"/><br><br>
-            </select><br>
-            <button onclick="goupdate()">修改</button> 
-            <button  name="button"  onclick="window.location.href='/adminindex';">返回</button>
-        </div>
-    </div>
+<h2>这是修改页面</h2>
+<input  type="hidden" id="id" th:value="${doctor.id}"><br><br>
+请输入姓名：<input  id="name" th:value="${doctor.name}"/><br><br>
+请输入faculty：<input id="faculty" th:value="${doctor.faculty}"/><br><br>
+请选择性别：<select id="sex" style="width: 173px">
+    <option value="男" th:selected="${doctor.sex} eq '男'">男</option>
+    <option value="女" th:selected="${doctor.sex} eq '女'">女</option>
+</select>
+请输入profession：<input id="profession" th:value="${doctor.profession}"/><br><br>
+请输入political：<input id="political" th:value="${doctor.political}"/><br><br>
+请输入expertise：<input id="expertise" th:value="${doctor.expertise}"/><br><br>
+请输入description：<input id="description" th:value="${doctor.description}"/><br><br>
+请输入status：<input id="status" th:value="${doctor.status}"/><br><br>
+请输入password：<input id="password" th:value="${doctor.password}"/><br><br>
+请输入phone_number：<input id="phone_number" th:value="${doctor.phone_number}"/><br><br>
+请输入id_number：<input id="id_number" th:value="${doctor.id_number}"/><br><br>
+</select><br><br>
+<button onclick="goupdate()">修改</button> 
+<button  name="button"  onclick="window.location.href='/adminindex';">返回</button>
 </body>
 <script>
     function goupdate() {
-        var DID=$("#DID").val();
+        var id=$("#id").val();
         var name = $("#name").val();
         var sex = $("#sex").val();
         var faculty = $("#faculty").val();
@@ -45,7 +40,7 @@
         var password = $("#password").val();
         var phone_number = $("#phone_number").val();
         var id_number = $("#id_number").val();
-        $.post("/updatedoctor",{DID:DID,name:name,faculty:faculty,profession:profession,
+        $.post("/updatedoctor",{id:id,name:name,faculty:faculty,profession:profession,
             political:political,expertise:expertise,description:description,status:status,
         password:password,phone_number:phone_number,id_number:id_number,sex:sex},function (res) {
             if (res==true) {
@@ -57,34 +52,4 @@
         })
     }
 </script>
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-        font-size: 14px;	
-        box-sizing: border-box;
-    }
-    body{
-        background-color: #56baed;
-    }
-    #main{
-        box-shadow: 0 30px 60px 0 rgba(0,0,0,.3);
-        width: 30%;
-        margin: auto;
-        background-color: #ffffff;
-        font-size: 20px;
-    }
-    h2{
-        font-size: 1.5em;
-    }
-    input,select{
-        float: right;
-        margin-right: 11%;
-    }
-    button{
-        margin-left: 20%;
-        margin-right: 10%;
-        margin-bottom: 20px;
-    }
-</style>
 </html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="csmen.group.project.dao.ForumDao">
+	<select id="selectAll" resultType="csmen.group.project.entity.ForumInfo">
+		select * from forum;
+	</select>
+	
+	<select id="selectById" parameterType="java.lang.Integer" resultType="csmen.group.project.entity.ForumInfo">
+		select * from forum where id=#{id}
+	</select>
+	
+	<select id="selectByTopic" parameterType="String" resultType="csmen.group.project.entity.ForumInfo">
+		select * from forum where topic=#{topic}
+	</select>
+</mapper>
