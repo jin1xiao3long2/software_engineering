@@ -2,58 +2,61 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>首页</title>
+    <title>查询结果</title>
     <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
 </head>
 <body>
 <!-- 顶部导航栏 -->
-<div th:replace="~{Bar :: topBar}"></div>
+    <div th:replace="~{Bar :: topBar}"></div>
+    <div class="main">
+        <button onclick="change_table('tab1')">医生</button>
+        <button onclick="change_table('tab2')">信息</button>
+        <button onclick="change_table('tab3')">管理信息</button>
+        <table width="888" border="1" id="tab1" >
+            <tr>
+                <td align="center" width = "10%">医生名</td>
+                <td align="center" width = "10%">医院(ID)</td>
+                <td align="center" width = "80%">描述</td>
+            </tr>
+            <tr th:each="doctor:${doctorlist}">
+                <td align="center" width = "10%" th:text="${doctor.name}"></td>
+                <td align="center" width = "10%" th:text="${doctor.HID}"></td>
+                <td align="center" width = "80%" th:text="${doctor.description}"></td>
+            </tr>
+        </table>
 
-<button onclick="change_table('tab1')">医生</button>
-<button onclick="change_table('tab2')">信息</button>
-<button onclick="change_table('tab3')">这啥</button>
-<table width="888" border="1" id="tab1" >
-    <tr>
-        <td align="center" width = "10%">医生名</td>
-        <td align="center" width = "10%">医院(ID)</td>
-        <td align="center" width = "80%">描述</td>
-    </tr>
-    <tr th:each="doctor:${doctorlist}">
-        <td align="center" width = "10%" th:text="${doctor.name}"></td>
-        <td align="center" width = "10%" th:text="${doctor.HID}"></td>
-        <td align="center" width = "80%" th:text="${doctor.description}"></td>
-    </tr>
-</table>
+        <table width="888" border="1" id="tab2" style="display:none">
+            <tr>
+                <td align="center" width = "30%">医生名</td>
+                <td align="center" width = "30%">性别</td>
+                <td align="center" width = "40%">类别</td>
+            </tr>
+            <tr th:each="doctor:${doctorlist}">
+                <td align="center" width = "30%" th:text="${doctor.name}"></td>
+                <td align="center" width = "30%" th:text="${doctor.sex}"></td>
+                <td align="center" width = "40%" th:text="${doctor.status}"></td>
+            </tr>
+        </table>
 
-<table width="888" border="1" id="tab2" style="display:none">
-    <tr>
-        <td align="center" width = "30%">医生名</td>
-        <td align="center" width = "30%">性别</td>
-        <td align="center" width = "40%">类别</td>
-    </tr>
-    <tr th:each="doctor:${doctorlist}">
-        <td align="center" width = "30%" th:text="${doctor.name}"></td>
-        <td align="center" width = "30%" th:text="${doctor.sex}"></td>
-        <td align="center" width = "40%" th:text="${doctor.status}"></td>
-    </tr>
-</table>
+        <table width="888" border="1" id="tab3" style="display:none">
+            <tr>
+                <td align="center" width = "10%">医生名</td>
+                <td align="center" width = "45%">电话</td>
+                <td align="center" width = "45%">身份证</td>
+            </tr>
+            <tr th:each="doctor:${doctorlist}">
+                <td align="center" width = "10%" th:text="${doctor.name}"></td>
+                <td align="center" width = "45%" th:text="${doctor.phone_number}"></td>
+                <td align="center" width = "45%" th:text="${doctor.id_number}"></td>
+            </tr>
+        </table>
 
-<table width="888" border="1" id="tab3" style="display:none">
-    <tr>
-        <td align="center" width = "10%">医生名</td>
-        <td align="center" width = "45%">电话</td>
-        <td align="center" width = "45%">身份证</td>
-    </tr>
-    <tr th:each="doctor:${doctorlist}">
-        <td align="center" width = "10%" th:text="${doctor.name}"></td>
-        <td align="center" width = "45%" th:text="${doctor.phone_number}"></td>
-        <td align="center" width = "45%" th:text="${doctor.id_number}"></td>
-    </tr>
-</table>
+    </div>
 
 
 
-<div th:replace="~{Bar :: footerBar}"></div>
+
+    <div th:replace="~{Bar :: footerBar}"></div>
 
 <script>
 
@@ -67,5 +70,11 @@
         tab.style.display='table'
     }
 </script>
+<style>
+    .main{
+        width: 60%;
+        margin: auto;
+    }
+</style>
 </body>
 </html>
