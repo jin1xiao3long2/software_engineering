@@ -49,18 +49,18 @@
         </div>
     </div>
     <div id="setting">
-        <h2>这是修改页面</h2>
+        <h2>修改个人信息</h2>
         <input  type="hidden" id="id" th:value="${user.id}"><br><br>
-        请输入姓名：<input  id="name" th:value="${user.name}"/><br><br>
-        请输入密码: <input type="password" id="password3" th:value="${user.password}"/><br><br>
-        请输入手机号：<input id="phone_number" th:value="${user.phone_number}"/><br><br>
-        请输入身份证号：<input id="id_number" th:value="${user.id_number}"/>
-        请选择性别：<select id="sex" style="width: 173px">
+        请输入姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input  id="name" th:value="${user.name}"/><br><br>
+        请输入密码: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="password" id="password3" th:value="${user.password}"/><br><br>
+        请输入手机号：&nbsp&nbsp&nbsp&nbsp<input id="phone_number" th:value="${user.phone_number}"/><br><br>
+        请输入身份证号：<input id="id_number" th:value="${user.id_number}"/><br><br>
+        请选择性别：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<select id="sex" style="width: 173px">
             <option value="男">男</option>
             <option value="女">女</option>
         </select><br><br>
-        <button onclick="goupdate()">修改</button> 
-        <button  name="button"  onclick="javascript:history.back(-1);" id = "cancel">返回</button>
+        <button onclick="goupdate()" class="btn2">修改</button> 
+        <button  name="button"  onclick="javascript:history.back(-1);" id = "cancel" class="btn2">返回</button>
     </div>
     <div class="search">
         <form action="/queryfind"method="post">
@@ -151,11 +151,16 @@
         height: 2.5em;
         float: left;
     }
+    h2{
+        font-size: 1.5em;
+    }
     h4{
         float: left;
     }
     .btn2{
-        margin-left: 80px;
+        margin-left: 20%;
+        margin-right: 10%;
+        margin-bottom: 20px;
         font-size: 20px;
     }
     body{
@@ -186,7 +191,6 @@
     a{
         color: #666;
         text-decoration: none;
-        target = _blank;
     }
     header{
         height: 60px;
@@ -296,12 +300,12 @@
     }
     #setting{
         width: 50%;
-        height: 300px;
         background-color: white;
         position: absolute;
         left: 25%;
         top: 0;
         display: none;
+        font-size: 20px;
         z-index: 3;
     }
 </style>
