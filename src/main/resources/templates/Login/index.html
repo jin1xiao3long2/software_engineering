@@ -63,10 +63,10 @@
         <button  name="button"  onclick="javascript:history.back(-1);" id = "cancel">返回</button>
     </div>
     <div class="search">
-        <form action="http://baidu.com/s"method="get">
+        <form action="/queryfind"method="post">
 			<input type="search" name="search1" placeholder="请输入搜索关键字...">
 			<button type="submit">search</button>
-		</form>
+        </form>
     </div>
     
     <div class="user">
@@ -95,13 +95,13 @@
             <h2>在线问诊</h2></a>
         </div>
         <div class="find">
-            <a href="#">
+            <a href="../Home.html"  target="_blank">
                 <span class="p3"></span>
                 <h2>寻找医生</h2>
             </a>
         </div>
         <div class="forum">
-            <a href="../AdminControll/AdminLogin.html">
+            <a href="../AdminControll/AdminLogin.html" target="_blank">
                 <span class="p4"></span>
                 <h2>管理员登录</h2>
             </a>
@@ -186,6 +186,7 @@
     a{
         color: #666;
         text-decoration: none;
+        target = _blank;
     }
     header{
         height: 60px;
