@@ -12,4 +12,8 @@
 	<select id="selectByTopic" parameterType="String" resultType="csmen.group.project.entity.ForumInfo">
 		select * from forum where topic=#{topic}
 	</select>
+	
+	 <insert id="addForumTopic" parameterType="csmen.group.project.entity.ForumInfo">
+       INSERT INTO Forum(topic,author,content,replynum) values (#{topic},#{author},#{content},#{replynum})
+    </insert>
 </mapper>

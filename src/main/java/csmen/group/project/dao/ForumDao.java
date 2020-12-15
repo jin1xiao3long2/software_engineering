@@ -12,4 +12,6 @@ public interface ForumDao {
 	ForumInfo selectById(Integer id);
 	
 	ForumInfo selectByTopic(String topic);
+	
+	int addForumTopic(ForumInfo foruminfo);
 }

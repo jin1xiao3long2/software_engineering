@@ -21,8 +21,9 @@
     </tr>
 	</table>
 	
-	<form action="/Forum/gotoReply" method="post" th:object="${ReplyInfo}">
+	<form action="/Forum/doReply" method="post">
 		<input id="content" name="content" required="required" placeholder="输入回复内容">
+		<input id="topicname" name="topicname" type="hidden" th:value="${topic.topic}">
 		<input type="submit" value="回复">
 	</form>
 </body>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+</head>
+<body>
+	<form action="doCreatePost" method="post">
+		<input id="topic" name="topic" required="required" placeholder="输入帖子主题">
+		<input id="content" name="content" required="required" placeholder="输入帖子内容">
+		<input type="submit" value="确定">
+	</form>
+</body>
+</html>

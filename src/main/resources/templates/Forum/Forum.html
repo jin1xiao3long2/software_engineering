@@ -21,6 +21,10 @@
 
 <a th:if="${foruminfosize==0}">没有帖子，来发布第一条帖子吧</a>
 
+<form action="/createPost" method="post">
+	<input type="submit" value="创建一个帖子">
+</form>
+
 	<button onclick="history.go(-1)">返回</button>
 </body>
 </html>
