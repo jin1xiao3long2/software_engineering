@@ -1,3 +1,6 @@
+net start mysql
+mysql.exe -u root -p
+
 CREATE DATABASE IF NOT EXISTS runoob;
 use runoob;
 set names utf8;
